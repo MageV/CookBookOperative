@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   startMeUp() async
   {
     Directory docsDir=await
