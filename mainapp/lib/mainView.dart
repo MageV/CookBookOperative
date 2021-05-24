@@ -5,15 +5,13 @@ import 'views/SettingsView.dart';
 
 class MainView extends StatelessWidget {
 
-
-
-  var _icons=[
+  final _icons=[
     Icon(Icons.article),
     Icon(Icons.waves),
     Icon(Icons.settings)
   ];
-  var _names=["Recipes","News line","Settings"];
-  List<Tab> _tabBarItems=[];
+  final _names=["Recipes","News line","Settings"];
+  final List<Tab> _tabBarItems=[];
 
   @override
   Widget build(BuildContext context) {

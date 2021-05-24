@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mainapp/models/BaseModel.dart';
 import 'package:mainapp/models/NewsItem.dart';
 import 'package:sqflite/sqflite.dart';
