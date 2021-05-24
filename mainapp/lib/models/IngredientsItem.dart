@@ -6,7 +6,7 @@ class IngridientsItem extends BaseModel
   int id;
   String header;
   int calories;
-  static String createQuery="CREATE TABLE INGRIDIENTS("
+  static String createQuery="CREATE TABLE INGREDIENTS("
       "ID INTEGER PRIMARY KEY NOT NULL, "
       "HEADER STRING,"
       "CALORIES INTEGER)";
