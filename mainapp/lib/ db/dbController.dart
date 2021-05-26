@@ -1,4 +1,6 @@
 import 'package:mainapp/models/BaseModel.dart';
+import 'package:mainapp/models/ContentItem.dart';
+import 'package:mainapp/models/IngredientsItem.dart';
 import 'package:mainapp/models/NewsItem.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -9,7 +11,8 @@ import 'package:sqflite/sqflite.dart';
 
   static final dbController db=dbController._();
   static Database _database;
-  var tableCreate=[NewsItem.createQuery];
+  var tableCreate=[NewsItem.createQuery,IngredientsItem.createQuery,
+    ContentItem.createQuery];
   int get _version => 1;
 
   Future<Database> get database async
@@ -24,13 +27,14 @@ import 'package:sqflite/sqflite.dart';
 
   init() async {
 
-      String _path = await getDatabasesPath() + 'opcook';
+      String _path = await getDatabasesPath() + 'opcook.magev.db';
       return await openDatabase(
           _path,
           version: _version,
           onOpen: (db){},
           onCreate:(Database db, int version)
           async{
+            await db.execute("PRAGMA foreign_keys=ON");
             await tableCreate.forEach((element) {db.execute(element);});
           }
       );

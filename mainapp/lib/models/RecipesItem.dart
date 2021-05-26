@@ -1,6 +1,10 @@
 import 'package:mainapp/models/BaseModel.dart';
 
-class RecipesView extends BaseModel
+class RecipesItem extends BaseModel
 {
+  static String name="recipes";
 
+  int id;
+  String header;
+  
 }

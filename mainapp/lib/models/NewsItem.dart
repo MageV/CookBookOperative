@@ -10,10 +10,10 @@ class NewsItem extends BaseModel
   static String tableName="news";
   static String createQuery="CREATE TABLE NEWS("
   "ID INTEGER PRIMARY KEY NOT NULL,"
-  "DATENEWS STRING,"
-  "HEADER STRING"
-  "CONTENT STRING"
-  "STATUS STRING)";
+  "DATENEWS TEXT,"
+  "HEADER TEXT"
+  "CONTENT TEXT"
+  "STATUS TEXT)";
 
   String dateNews;
   String header;
