@@ -10,7 +10,7 @@ class IngredientsItem extends BaseModel
   String filelink;
   int calories;
   static String createQuery="CREATE TABLE $tableName("
-      "ID INTEGER PRIMARY KEY NOT NULL,"
+      "ID INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,"
       "HEADER TEXT,"
       "FILE_LINK TEXT,"
       "CALORIES INTEGER)";

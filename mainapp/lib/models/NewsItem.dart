@@ -8,8 +8,8 @@ import 'package:mainapp/models/BaseModel.dart';
 class NewsItem extends BaseModel
 {
   static String tableName="news";
-  static String createQuery="CREATE TABLE NEWS("
-  "ID INTEGER PRIMARY KEY NOT NULL,"
+  static String createQuery="CREATE TABLE $tableName("
+  "ID INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,"
   "DATENEWS TEXT,"
   "HEADER TEXT"
   "CONTENT TEXT"
