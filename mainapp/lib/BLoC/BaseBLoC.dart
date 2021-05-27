@@ -6,7 +6,7 @@ import 'package:mainapp/models/BaseModel.dart';
 abstract class BaseBLoC
 {
   BaseBLoC(this._repository);
-  final dbController _repository;
+  final DBController _repository;
   final baseStreamController=StreamController<baseState>();
   Stream<baseState> get base=>baseStreamController.stream;
   void loadData(Map<String,dynamic> paramters);
@@ -15,6 +15,8 @@ abstract class BaseBLoC
   {
     baseStreamController.close();
   }
+
+  DBController get repository => _repository;
 }
 
 class baseState

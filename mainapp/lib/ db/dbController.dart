@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mainapp/models/BaseModel.dart';
 import 'package:mainapp/models/ContentItem.dart';
 import 'package:mainapp/models/IngredientsItem.dart';
@@ -8,11 +7,11 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 
 
-class dbController {
+class DBController {
 
-  dbController._();
+  DBController._();
 
-  static final dbController db = dbController._();
+  static final DBController db = DBController._();
   static Database _database;
   var tableCreate = [
     NewsItem.createQuery,
