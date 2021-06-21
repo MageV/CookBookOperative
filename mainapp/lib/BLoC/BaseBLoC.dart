@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:mainapp/%20db/dbController.dart';
+import 'package:mainapp/db/dbController.dart';
 import 'package:mainapp/models/BaseModel.dart';
 
 abstract class BaseBLoC

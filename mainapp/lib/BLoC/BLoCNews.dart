@@ -1,4 +1,4 @@
-import 'package:mainapp/%20db/dbController.dart';
+import 'package:mainapp/db/dbController.dart';
 import 'package:mainapp/BLoC/BaseBLoC.dart';
 import 'package:mainapp/models/BaseModel.dart';
 import 'package:mainapp/models/NewsItem.dart';

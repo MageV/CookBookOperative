@@ -14,8 +14,8 @@ class DBController {
   static final DBController db = DBController._();
   static Database _database;
   var tableCreate = [
-    NewsItem.createQuery,
     IngredientsItem.createQuery,
+    NewsItem.createQuery,
     ContentItem.createQuery,
     RecipesItem.createQuery];
 
@@ -38,7 +38,7 @@ class DBController {
         onOpen: (db) {},
         onCreate: (Database db, int version) async {
           await db.execute("PRAGMA foreign_keys=ON");
-          await tableCreate.forEach((element) {
+          tableCreate.forEach((element) {
             db.execute(element);
           });
         }
