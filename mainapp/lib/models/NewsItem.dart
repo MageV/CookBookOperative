@@ -43,15 +43,4 @@ class NewsItem extends BaseModel
       status:map['status']
     );
   }
-   NewsItem fromJSON(String str)
-  {
-    final decode=json.decode(str);
-    return fromMap(decode);
-  }
-  String toJSON()
-  {
-    final encode=toMap();
-    return json.encode(encode);
-  }
-
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'views/newsView.dart';
-import 'views/RecipesView.dart';
-import 'views/SettingsView.dart';
+import 'newsView.dart';
+import 'RecipesView.dart';
+import 'SettingsView.dart';
 
 class MainView extends StatelessWidget {
 

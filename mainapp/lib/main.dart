@@ -1,15 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mainapp/mainView.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:mainapp/views/mainView.dart';
+import 'package:mainapp/services/dbService.dart';
 
 
 void main() {
+
+   dbService dbservice;
+
   WidgetsFlutterBinding.ensureInitialized();
   startMeUp() async
   {
-    Directory docsDir=await
-        getApplicationDocumentsDirectory();
+    await dbservice.init();
     runApp(MainView());
   }
   startMeUp();

@@ -36,15 +36,4 @@ class IngredientsItem extends BaseModel
             filelink: map["filelink"],
             calories: map["calories"]);
   }
-
-  IngredientsItem fromJSON(String str)
-  {
-    final decode=json.decode(str);
-    return fromMap(decode);
-  }
-  String toJSON()
-  {
-    final encode=toMap();
-    return json.encode(encode);
-  }
 }

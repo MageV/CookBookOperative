@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mainapp/models/BaseModel.dart';
 
 class RecipesItem extends BaseModel
@@ -15,5 +17,27 @@ class RecipesItem extends BaseModel
   String filepath;
   int fkcontent;
 
-  
+  RecipesItem({this.id, this.header, this.data, this.filepath, this.fkcontent});
+
+  Map<String,dynamic> toMap()
+  {
+    Map<String,dynamic> map=
+    {
+      "header":header,
+      "data":data,
+      "filepath":filepath,
+      "fkcontent":fkcontent
+    };
+    if(id!=null){map['id']=id;}
+    return map;
+  }
+  RecipesItem fromMap(Map<String,dynamic> map)
+  {
+    return
+     RecipesItem(id: map["id"],
+          header: map["header"],
+          data: map["data"],
+          filepath: map["filepath"],
+          fkcontent:map["fkcontent"]);
+  }
 }

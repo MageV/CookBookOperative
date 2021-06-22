@@ -1,17 +1,22 @@
+import 'dart:io';
+
 import 'package:mainapp/models/BaseModel.dart';
 import 'package:mainapp/models/ContentItem.dart';
 import 'package:mainapp/models/IngredientsItem.dart';
 import 'package:mainapp/models/NewsItem.dart';
 import 'package:mainapp/models/RecipesItem.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 
 
-class DBController {
+class dbService {
 
-  DBController._();
+  dbService._();
 
-  static final DBController db = DBController._();
+  static final dbService db = dbService._();
+  static String dbPath;
+  static String imgPath;
   static Database _database;
   var tableCreate = [
     IngredientsItem.createQuery,
@@ -31,9 +36,11 @@ class DBController {
 
 
   init() async {
-    String _path = await getDatabasesPath() + 'opcook.magev.db';
+    dbPath = await getDatabasesPath() + 'opcook.magev.db';
+    Directory dir= await getApplicationDocumentsDirectory();
+    imgPath=dir.path;
     return await openDatabase(
-        _path,
+        dbPath,
         version: _version,
         onOpen: (db) {},
         onCreate: (Database db, int version) async {
