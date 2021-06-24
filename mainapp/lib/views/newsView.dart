@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mainapp/models/NewsItem.dart';
+
 
 class NewsView extends StatelessWidget {
 
