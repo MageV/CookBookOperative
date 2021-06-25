@@ -1,10 +1,9 @@
 
-import 'package:sqfentity/sqfentity.dart';
 import 'package:sqfentity_gen/sqfentity_gen.dart';
+
 class Model
 {
-  static const tableIngredients=SqfEntityTable(
-    tableName: 'ingredients',
+  static final tableIngredients=SqfEntityTable(tableName: 'ingredients',
     primaryKeyName: 'id',
     primaryKeyType: PrimaryKeyType.integer_auto_incremental,
     useSoftDeleting: true,
@@ -15,7 +14,7 @@ class Model
         SqfEntityField('measure',DbType.text),
       ]
   );
-  static const tableCategory=SqfEntityTable(
+  static final tableCategory=SqfEntityTable(
     tableName: 'category',
     primaryKeyName: 'id',
     primaryKeyType: PrimaryKeyType.integer_auto_incremental,
@@ -27,7 +26,7 @@ class Model
         SqfEntityField('imagepath',DbType.text)
       ]
   );
-  static const tableRecipes=SqfEntityTable(
+  static final tableRecipes=SqfEntityTable(
     tableName:'recipes',
     primaryKeyName: 'id',
     primaryKeyType: PrimaryKeyType.integer_auto_incremental,
@@ -44,7 +43,7 @@ class Model
         defaultValue: 0)
     ]
   );
-static const tableContents=SqfEntityTable(
+static final tableContents=SqfEntityTable(
   tableName: 'contents',
   primaryKeyType: PrimaryKeyType.integer_auto_incremental,
   primaryKeyName: 'id',
@@ -66,10 +65,35 @@ static const tableContents=SqfEntityTable(
     ),
   ]
 );
-static const viewCategoryRecipe=SqfEntityTable(
+static final viewCategoryRecipe=SqfEntityTable(
   modelName: null,
   tableName: 'viewcatrecipe',
   objectType: ObjectType.view,
-
+  fields: [
+    SqfEntityField('category_name', DbType.text),
+    SqfEntityField('recipe', DbType.text),
+    SqfEntityField('recipe_id', DbType.integer),
+    SqfEntityFieldRelationship(
+      parentTable: tableCategory,
+      deleteRule: DeleteRule.NO_ACTION,
+      fieldName: 'catid',
+      isPrimaryKeyField: false
+    ),
+  ],
+  sqlStatement: 'SELECT '
+      'catid,'
+      'category.header as category_name'
+      'recipes.id as recipe_id,'
+      'recipes.header as recipe'
+      'from category'
+      'inner join recipes on category.id=recipes.fk_category'
+      'order by catid'
+);
+static final dbModel=SqfEntityModel(
+  databaseName: 'cookbook',
+  password: null,
+  databaseTables: [tableCategory,tableIngredients,tableRecipes,tableContents],
+  formTables: [tableCategory,tableIngredients,tableRecipes],
+  bundledDatabasePath: '/assets/com.magev.cookbook.sqlite'
 );
 }
