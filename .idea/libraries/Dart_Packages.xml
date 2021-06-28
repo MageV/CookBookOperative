@@ -79,13 +79,6 @@
             </list>
           </value>
         </entry>
-        <entry key="build_verify">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/build_verify-2.0.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="built_collection">
           <value>
             <list>
@@ -124,7 +117,7 @@
         <entry key="cli_util">
           <value>
             <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.0/lib" />
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.1/lib" />
             </list>
           </value>
         </entry>
@@ -152,14 +145,7 @@
         <entry key="convert">
           <value>
             <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="coverage">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/coverage-1.0.3/lib" />
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.1/lib" />
             </list>
           </value>
         </entry>
@@ -212,6 +198,27 @@
             </list>
           </value>
         </entry>
+        <entry key="floor">
+          <value>
+            <list>
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor-1.1.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="floor_annotation">
+          <value>
+            <list>
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor_annotation-1.0.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="floor_generator">
+          <value>
+            <list>
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor_generator-1.1.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter">
           <value>
             <list>
@@ -223,6 +230,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_calendar_carousel-2.0.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_localizations">
+          <value>
+            <list>
+              <option value="$USER_HOME$/snap/flutter/common/flutter/packages/flutter_localizations/lib" />
             </list>
           </value>
         </entry>
@@ -373,13 +387,6 @@
             </list>
           </value>
         </entry>
-        <entry key="node_preamble">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="package_config">
           <value>
             <list>
@@ -485,20 +492,6 @@
             </list>
           </value>
         </entry>
-        <entry key="shelf_packages_handler">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_packages_handler-3.0.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="shelf_static">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_static-1.0.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="shelf_web_socket">
           <value>
             <list>
@@ -520,20 +513,6 @@
             </list>
           </value>
         </entry>
-        <entry key="source_map_stack_trace">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_map_stack_trace-2.1.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="source_maps">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_maps-0.10.10/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="source_span">
           <value>
             <list>
@@ -541,17 +520,10 @@
             </list>
           </value>
         </entry>
-        <entry key="sqfentity">
+        <entry key="sqflite">
           <value>
             <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqfentity-2.0.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="sqfentity_gen">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqfentity_gen-2.0.0/lib" />
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3/lib" />
             </list>
           </value>
         </entry>
@@ -566,13 +538,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_common_ffi-2.0.0+1/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="sqflite_sqlcipher">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_sqlcipher-2.0.0/lib" />
             </list>
           </value>
         </entry>
@@ -625,24 +590,10 @@
             </list>
           </value>
         </entry>
-        <entry key="test">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test-1.16.8/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="test_api">
           <value>
             <list>
               <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.3.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="test_core">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.3.19/lib" />
             </list>
           </value>
         </entry>
@@ -667,13 +618,6 @@
             </list>
           </value>
         </entry>
-        <entry key="vm_service">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vm_service-6.2.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="watcher">
           <value>
             <list>
@@ -688,17 +632,10 @@
             </list>
           </value>
         </entry>
-        <entry key="webkit_inspection_protocol">
-          <value>
-            <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webkit_inspection_protocol-1.0.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="win32">
           <value>
             <list>
-              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.2/lib" />
+              <option value="$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.4/lib" />
             </list>
           </value>
         </entry>
@@ -730,18 +667,16 @@
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/build_resolvers-2.0.3/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner-2.0.5/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner_core-7.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/build_verify-2.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-5.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/built_value-8.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.2.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/checked_yaml-2.0.1/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/code_builder-4.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/coverage-1.0.3/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/dart_style-2.0.1/lib" />
@@ -749,6 +684,9 @@
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor-1.1.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor_annotation-1.0.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/floor_generator-1.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_calendar_carousel-2.0.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_slidable-0.6.0/lib" />
@@ -769,7 +707,6 @@
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/lib" />
@@ -785,18 +722,12 @@
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-2.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-1.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.1.4/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_packages_handler-3.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_static-1.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-1.0.1/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_gen-1.0.2/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_map_stack_trace-2.1.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_maps-0.10.10/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqfentity-2.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqfentity_gen-2.0.0/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_common-2.0.0+2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_common_ffi-2.0.0+1/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_sqlcipher-2.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqlite3-1.1.2/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/lib" />
@@ -804,21 +735,18 @@
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/synchronized-3.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test-1.16.8/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.3.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.3.19/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/timing-1.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vm_service-6.2.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/watcher-1.0.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/webkit_inspection_protocol-1.0.0/lib" />
-      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.2/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.4/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/snap/flutter/common/flutter/packages/flutter_localizations/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/packages/flutter_test/lib" />
       <root url="file://$USER_HOME$/snap/flutter/common/flutter/packages/flutter_web_plugins/lib" />
     </CLASSES>

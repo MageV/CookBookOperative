@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'newsView.dart';
+import 'package:mainapp/models/model.dart';
+import 'CategoryView.dart';
 import 'RecipesView.dart';
 import 'SettingsView.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MainView extends StatelessWidget {
 
@@ -12,6 +14,7 @@ class MainView extends StatelessWidget {
   ];
   final _names=["Recipes","News line","Settings"];
   final List<Tab> _tabBarItems=[];
+  MainView();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class MainView extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              RecipesView(),NewsView(),SettingsView()
+              CategoryView(),RecipesView(),SettingsView()
             ],
           ),
         ),

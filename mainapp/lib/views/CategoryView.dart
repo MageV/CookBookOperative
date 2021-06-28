@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class NewsView extends StatelessWidget {
+class CategoryView extends StatelessWidget {
 
 
   @override

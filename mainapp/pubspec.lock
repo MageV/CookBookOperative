@@ -78,13 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.0.0"
-  build_verify:
-    dependency: "direct dev"
-    description:
-      name: build_verify
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   built_collection:
     dependency: transitive
     description:
@@ -126,7 +119,7 @@ packages:
       name: cli_util
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   clock:
     dependency: transitive
     description:
@@ -154,14 +147,7 @@ packages:
       name: convert
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
-  coverage:
-    dependency: transitive
-    description:
-      name: coverage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
+    version: "3.0.1"
   crypto:
     dependency: transitive
     description:
@@ -211,6 +197,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  floor:
+    dependency: "direct main"
+    description:
+      name: floor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  floor_annotation:
+    dependency: transitive
+    description:
+      name: floor_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  floor_generator:
+    dependency: "direct dev"
+    description:
+      name: floor_generator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -223,6 +230,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -366,13 +378,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  node_preamble:
-    dependency: transitive
-    description:
-      name: node_preamble
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   package_config:
     dependency: transitive
     description:
@@ -478,20 +483,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.4"
-  shelf_packages_handler:
-    dependency: transitive
-    description:
-      name: shelf_packages_handler
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
-  shelf_static:
-    dependency: transitive
-    description:
-      name: shelf_static
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   shelf_web_socket:
     dependency: transitive
     description:
@@ -511,20 +502,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  source_map_stack_trace:
-    dependency: transitive
-    description:
-      name: source_map_stack_trace
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
-  source_maps:
-    dependency: transitive
-    description:
-      name: source_maps
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.10"
   source_span:
     dependency: transitive
     description:
@@ -532,20 +509,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-  sqfentity:
-    dependency: "direct main"
+  sqflite:
+    dependency: transitive
     description:
-      name: sqfentity
+      name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
-  sqfentity_gen:
-    dependency: "direct main"
-    description:
-      name: sqfentity_gen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
+    version: "2.0.0+3"
   sqflite_common:
     dependency: transitive
     description:
@@ -560,13 +530,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0+1"
-  sqflite_sqlcipher:
-    dependency: transitive
-    description:
-      name: sqflite_sqlcipher
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   sqlite3:
     dependency: transitive
     description:
@@ -616,13 +579,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  test:
-    dependency: transitive
-    description:
-      name: test
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.16.8"
   test_api:
     dependency: transitive
     description:
@@ -630,13 +586,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  test_core:
-    dependency: transitive
-    description:
-      name: test_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.19"
   timing:
     dependency: transitive
     description:
@@ -658,13 +607,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  vm_service:
-    dependency: transitive
-    description:
-      name: vm_service
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.2.0"
   watcher:
     dependency: transitive
     description:
@@ -679,20 +621,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  webkit_inspection_protocol:
-    dependency: transitive
-    description:
-      name: webkit_inspection_protocol
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   win32:
     dependency: transitive
     description:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.2"
+    version: "2.2.4"
   xdg_directories:
     dependency: transitive
     description:

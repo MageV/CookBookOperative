@@ -18,28 +18,35 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
- # scoped_model: ^1.1.0
+  floor: ^1.1.0
   path_provider: ^2.0.2
   flutter_slidable: ^0.6.0
   intl: ^0.17.0
   image_picker: ^0.8.1+1
   flutter_calendar_carousel: ^2.0.1
-  # date_time_picker: any
   path: any
-  sqfentity: ^2.0.0
-  sqfentity_gen: ^2.0.0
+  #angel3_orm: ^4.0.0-beta.2
+  #sqfentity: ^2.0.0
+  #sqfentity_gen: ^2.0.0
+  # scoped_model: ^1.1.0
+  # date_time_picker: any
+  #f_orm_m8: ^0.8.0+3
 
 dev_dependencies:
+  floor_generator: ^1.1.0
   build_runner: ^2.0.5
-  build_verify: ^2.0.0
+  #build_runner: ^2.0.5
+  #build_verify: ^2.0.0
 
 
   flutter_test:
