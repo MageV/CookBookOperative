@@ -1,21 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:mainapp/models/model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class dbService{
   dbService._privateConstructor();
+  late var Preferences;
+  late DbDao DBdao;
+  late var ApplicationParameters;
   static final dbService _instance=dbService._privateConstructor();
   factory dbService()
   {
     return _instance;
   }
-  late DbDao DBdao;
   init(DbDao dao)
   async {
     DBdao=dao;
-    List<Category> catInit=[];
-    if( (await DBdao.getCategoryCount())==0)
-    {
-
-    }
+    Preferences=await SharedPreferences.getInstance();
   }
 
 }

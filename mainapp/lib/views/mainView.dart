@@ -3,7 +3,6 @@ import 'package:mainapp/models/model.dart';
 import 'CategoryView.dart';
 import 'RecipesView.dart';
 import 'SettingsView.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MainView extends StatelessWidget {
 

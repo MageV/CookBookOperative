@@ -88,6 +88,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `recipe` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `header` TEXT NOT NULL, `description` TEXT NOT NULL, `image_path` TEXT NOT NULL, `fk_category` INTEGER NOT NULL, FOREIGN KEY (`fk_category`) REFERENCES `category` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `contents` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `volume` REAL NOT NULL, `fk_recipe` INTEGER NOT NULL, `fk_ingrs` INTEGER NOT NULL, FOREIGN KEY (`fk_recipe`) REFERENCES `recipe` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`fk_ingrs`) REFERENCES `ingredient` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `parameters` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `value` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -104,6 +106,14 @@ class _$AppDatabase extends AppDatabase {
 class _$DbDao extends DbDao {
   _$DbDao(this.database, this.changeListener)
       : _queryAdapter = QueryAdapter(database),
+        _appParametersInsertionAdapter = InsertionAdapter(
+            database,
+            'parameters',
+            (AppParameters item) => <String, Object?>{
+                  'id': item.id,
+                  'name': item.name,
+                  'value': item.value
+                }),
         _categoryInsertionAdapter = InsertionAdapter(
             database,
             'category',
@@ -139,6 +149,15 @@ class _$DbDao extends DbDao {
                   'volume': item.volume,
                   'fk_recipe': item.fk_recipe,
                   'fk_ingrs': item.fk_ingrs
+                }),
+        _appParametersUpdateAdapter = UpdateAdapter(
+            database,
+            'parameters',
+            ['id'],
+            (AppParameters item) => <String, Object?>{
+                  'id': item.id,
+                  'name': item.name,
+                  'value': item.value
                 }),
         _categoryUpdateAdapter = UpdateAdapter(
             database,
@@ -179,6 +198,15 @@ class _$DbDao extends DbDao {
                   'volume': item.volume,
                   'fk_recipe': item.fk_recipe,
                   'fk_ingrs': item.fk_ingrs
+                }),
+        _appParametersDeletionAdapter = DeletionAdapter(
+            database,
+            'parameters',
+            ['id'],
+            (AppParameters item) => <String, Object?>{
+                  'id': item.id,
+                  'name': item.name,
+                  'value': item.value
                 }),
         _categoryDeletionAdapter = DeletionAdapter(
             database,
@@ -227,6 +255,8 @@ class _$DbDao extends DbDao {
 
   final QueryAdapter _queryAdapter;
 
+  final InsertionAdapter<AppParameters> _appParametersInsertionAdapter;
+
   final InsertionAdapter<Category> _categoryInsertionAdapter;
 
   final InsertionAdapter<Ingredient> _ingredientInsertionAdapter;
@@ -235,6 +265,8 @@ class _$DbDao extends DbDao {
 
   final InsertionAdapter<Contents> _contentsInsertionAdapter;
 
+  final UpdateAdapter<AppParameters> _appParametersUpdateAdapter;
+
   final UpdateAdapter<Category> _categoryUpdateAdapter;
 
   final UpdateAdapter<Ingredient> _ingredientUpdateAdapter;
@@ -242,6 +274,8 @@ class _$DbDao extends DbDao {
   final UpdateAdapter<Recipe> _recipeUpdateAdapter;
 
   final UpdateAdapter<Contents> _contentsUpdateAdapter;
+
+  final DeletionAdapter<AppParameters> _appParametersDeletionAdapter;
 
   final DeletionAdapter<Category> _categoryDeletionAdapter;
 
@@ -252,19 +286,33 @@ class _$DbDao extends DbDao {
   final DeletionAdapter<Contents> _contentsDeletionAdapter;
 
   @override
+  Future<List<String>?> getAppParameter(String name) async {
+    await _queryAdapter.queryNoReturn(
+        'select value from parameters where name=?1',
+        arguments: [name]);
+  }
+
+  @override
+  Future<List<AppParameters>> getAppParameters() async {
+    return _queryAdapter.queryList('select * from parameters',
+        mapper: (Map<String, Object?> row) => AppParameters(
+            row['id'] as int, row['name'] as String, row['value'] as String));
+  }
+
+  @override
   Future<int?> getCategoryCount() async {
     await _queryAdapter.queryNoReturn('select count(*) from category');
   }
 
   @override
-  Future<List<Category>> getAllCategories() async {
+  Future<List<Category?>> getAllCategories() async {
     return _queryAdapter.queryList('SELECT * from Category order by header',
         mapper: (Map<String, Object?> row) => Category(row['id'] as int,
             row['header'] as String, row['image_path'] as String));
   }
 
   @override
-  Future<List<Ingredient>> getAllIngredients() async {
+  Future<List<Ingredient>?> getAllIngredients() async {
     return _queryAdapter.queryList('SELECT * from Ingredient order by header',
         mapper: (Map<String, Object?> row) => Ingredient(
             row['id'] as int,
@@ -274,7 +322,7 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<List<Recipe>> getRecipeOfCategory(int id) async {
+  Future<List<Recipe>?> getRecipeOfCategory(int id) async {
     return _queryAdapter.queryList(
         'Select id,header,image_path from Recipe where fk_category=?1 order by header',
         mapper: (Map<String, Object?> row) => Recipe(row['id'] as int, row['header'] as String, row['description'] as String, row['image_path'] as String, row['fk_category'] as int),
@@ -282,7 +330,7 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<List<Recipe>> getRecipeById(int id) async {
+  Future<List<Recipe>?> getRecipeById(int id) async {
     return _queryAdapter.queryList(
         'select id,header,description from Recipe where id=?1',
         mapper: (Map<String, Object?> row) => Recipe(
@@ -295,10 +343,16 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<List<dynamic>> selectDetailedRecipe(int recid) async {
+  Future<List<dynamic>?> selectDetailedRecipe(int recid) async {
     await _queryAdapter.queryNoReturn(
-        'select I.id,I.header,I.meaure,C.volumefrom Ingredient inner join on I.id=c.fk_ingrs where C.fk_recipe=?1',
+        'select I.id,I.header,I.measure,C.volumefrom Ingredient inner join on I.id=c.fk_ingrs where C.fk_recipe=?1',
         arguments: [recid]);
+  }
+
+  @override
+  Future<List<int>> insertAppParameters(List<AppParameters> items) {
+    return _appParametersInsertionAdapter.insertListAndReturnIds(
+        items, OnConflictStrategy.abort);
   }
 
   @override
@@ -326,6 +380,12 @@ class _$DbDao extends DbDao {
   }
 
   @override
+  Future<int> UpdateAppParameters(List<AppParameters> items) {
+    return _appParametersUpdateAdapter.updateListAndReturnChangedRows(
+        items, OnConflictStrategy.abort);
+  }
+
+  @override
   Future<int> UpdateCategories(List<Category> items) {
     return _categoryUpdateAdapter.updateListAndReturnChangedRows(
         items, OnConflictStrategy.abort);
@@ -347,6 +407,11 @@ class _$DbDao extends DbDao {
   Future<int> UpdateContents(List<Contents> items) {
     return _contentsUpdateAdapter.updateListAndReturnChangedRows(
         items, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<int> deleteAppParameters(List<AppParameters> items) {
+    return _appParametersDeletionAdapter.deleteListAndReturnChangedRows(items);
   }
 
   @override
