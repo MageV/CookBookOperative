@@ -6,7 +6,7 @@ class dbService{
   dbService._privateConstructor();
   late var Preferences;
   late DbDao DBdao;
-  late var ApplicationParameters;
+  late SharedPreferences ApplicationParameters;
   static final dbService _instance=dbService._privateConstructor();
   factory dbService()
   {
@@ -15,7 +15,12 @@ class dbService{
   init(DbDao dao)
   async {
     DBdao=dao;
-    Preferences=await SharedPreferences.getInstance();
+    ApplicationParameters=await SharedPreferences.getInstance();
+    bool initialized=ApplicationParameters.getBool("INIT")??false;
+    if(!initialized)
+      {
+
+      }
   }
 
 }
