@@ -31,11 +31,19 @@ class MainView extends StatelessWidget {
               tabs: List.of(_tabBarItems)
             ),
           ),
-          body: TabBarView(
-            children: [
-              CategoryView(),RecipesView(),SettingsView()
-            ],
-          ),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image:AssetImage('assets/graphics/light/backphone.jpg'),
+                fit: BoxFit.cover
+              ),
+            ),
+            child: TabBarView(
+              children: [
+                CategoryView(),RecipesView(),SettingsView()
+              ],
+            ),
+          )
         ),
       ),
     );

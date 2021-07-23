@@ -6,8 +6,10 @@ import 'package:mainapp/views/mainView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/model.dart';
 
+const int Categories=7;
 var LocaleService=localizationService();
 var DBService=dbService();
+
 
 
 
