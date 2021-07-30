@@ -27,6 +27,8 @@ class dbService{
           String path="assets/graphics/category/"+name+".png";
 
           String? cat=localizationService().of(name);
+          print(name);
+          print(cat);
           items.add(new Category(i,cat!, path));
         }
       await dao.insertCategories(items);

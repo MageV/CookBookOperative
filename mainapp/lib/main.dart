@@ -9,13 +9,13 @@ import 'models/model.dart';
 const int Categories=7;
 var LocaleService=localizationService();
 var DBService=dbService();
-
+final String defaultLocale=Platform.localeName;
 
 
 
 void main() {
-  final String defaultLocale=Platform.localeName;
   WidgetsFlutterBinding.ensureInitialized();
+  //print(defaultLocale);
   startMeUp() async
   {
     final DatabaseApplication=await $FloorAppDatabase.databaseBuilder('com.magev.cookbook.sqlite').build();
