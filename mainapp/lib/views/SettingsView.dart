@@ -6,6 +6,7 @@ class SettingsView extends StatefulWidget {
   static const routeName='/SettingsView';
   @override
   Widget build(BuildContext context) {
+    //TODO - need to make extractions from parameters
     final args = ModalRoute.of(context)!.settings.arguments as WidgetParams;
     return Container();
   }
