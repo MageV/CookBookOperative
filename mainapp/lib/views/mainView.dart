@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/services/localizationService.dart';
 import 'CategoryView.dart';
 import 'RecipesView.dart';
@@ -6,6 +7,7 @@ import 'SettingsView.dart';
 
 class MainView extends StatelessWidget {
 
+  static const routeName='/MainView';
   final _icons=[
     Image.asset('assets/graphics/icons/ico_001.png',width:32,height:32),
     Image.asset('assets/graphics/icons/ico_002.png',width:32,height:32),
@@ -19,6 +21,7 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as WidgetParams;
     _tabBarItems.clear();
     for(int i=0;i<_names.length;i++)
       {
@@ -49,6 +52,11 @@ class MainView extends StatelessWidget {
           )
         ),
       ),
+      routes: {
+        RecipesView.routeName:(context) => RecipesView(),
+        MainView.routeName:(context) => MainView(),
+        SettingsView.routeName:(context) => SettingsView()
+      },
     );
   }
 
