@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
 import 'package:mainapp/views/CategoryView.dart';
-import 'package:mainapp/views/mainView.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'models/model.dart';
 
 const int Categories=7;
-var LocaleService=localizationService();
+var LocaleService=LocalizationService();
 var DBService=dbService();
 final String defaultLocale=Platform.localeName;
 

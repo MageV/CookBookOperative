@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:floor/floor.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'model.g.dart';

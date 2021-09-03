@@ -3,7 +3,6 @@ import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
-import 'package:path/path.dart';
 
 class RecipesView extends StatefulWidget {
   const RecipesView({Key? key}) : super(key: key);
@@ -27,28 +26,24 @@ class _RecipesViewState extends State<RecipesView> {
     int _id = args.category_id;
     String _header = args.title;
     String _path=args.path;
-    return new Stack(children: <Widget>[
-      Positioned.fill(
-          child:Align(
-            alignment: Alignment.center,
-            child:      new Image.asset(_path,
-                fit: BoxFit.fitHeight),
-          )
-      ),
+    print(_path);
+    _path=_path.replaceAll(".png", "_back.jpg");
+    print(_path);
+    return new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+     new Image.asset(_path,
+                fit: BoxFit.cover),
       Scaffold(
-        appBar: AppBar(title: Text(_header)),
+        appBar: AppBar(title: Text(_header),
+            backgroundColor: Colors.blueGrey.withOpacity(0.3)),
+        backgroundColor: Colors.transparent,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          backgroundColor: Colors.blueGrey,
           onPressed: () => _fabPressed(context),
           elevation: 5,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        bottomNavigationBar: new BottomAppBar(
-          color: Colors.blue,
-          child: new Row(),
-        ),
-        backgroundColor: Colors.white30,
         body: Column(
           children: <Widget>[
             Expanded(
@@ -68,7 +63,7 @@ class _RecipesViewState extends State<RecipesView> {
                                         color: Colors.white70, width: 1),
                                     borderRadius: BorderRadius.circular(15)),
                                 child: ListTile(
-                                  title: Text(e!.header),
+                                  title: Text(e.header),
                                   onTap: _itemTap(e.header, e.id, context),
                                   leading: CircleAvatar(
                                     backgroundImage: AssetImage(e.image_path),
@@ -89,10 +84,10 @@ class _RecipesViewState extends State<RecipesView> {
   _runCamera() {}
 
   _fabPressed(BuildContext context) {
-    String? dialogHeader = localizationService().of('dialog_item_new_header');
-    String? optionsMan = localizationService().of('dialog_item_new_manual');
-    String? optionsCam = localizationService().of('dialog_item_new_camera');
-    String? dialogCancel = localizationService().of('dialog_item_cancel');
+    String? dialogHeader = LocalizationService().of('dialog_item_new_header');
+    String? optionsMan = LocalizationService().of('dialog_item_new_manual');
+    String? optionsCam = LocalizationService().of('dialog_item_new_camera');
+    String? dialogCancel = LocalizationService().of('dialog_item_cancel');
     showDialog(
         context: context,
         builder: (BuildContext context) {

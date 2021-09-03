@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mainapp/main.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/localizationService.dart';
@@ -26,7 +25,7 @@ class dbService{
           String name="cat_"+i.toString();
           String path="assets/graphics/category/"+name+".png";
 
-          String? cat=localizationService().of(name);
+          String? cat=LocalizationService().of(name);
           print(name);
           print(cat);
           items.add(new Category(i,cat!, path));

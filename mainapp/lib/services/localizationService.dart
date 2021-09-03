@@ -1,5 +1,5 @@
-class localizationService {
-  localizationService._privateConstructor();
+class LocalizationService {
+  LocalizationService._privateConstructor();
   static late var defaultLanguage;
   static const allowedLang = ['en_US', 'ru_RU'];
   static Map<String, Map<String, String>> langValues = {
@@ -45,10 +45,10 @@ class localizationService {
       'application_header':'Книга рецептов'
     }
   };
-  static final localizationService _instance =
-      localizationService._privateConstructor();
+  static final LocalizationService _instance =
+      LocalizationService._privateConstructor();
 
-  factory localizationService() {
+  factory LocalizationService() {
     return _instance;
   }
   void init(String locale) {

@@ -5,38 +5,58 @@ import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
 
+
 import 'RecipesView.dart';
 import 'SettingsView.dart';
 
 class CategoryView extends StatefulWidget {
-  static final String? header = localizationService().of('CatView_header');
+  const CategoryView({Key? key}) : super(key: key);
+  static final String? header = LocalizationService().of('CatView_header');
   static const routeName = "/";
 
   @override
-  _CategoryViewState createState() => _CategoryViewState();
+  State<StatefulWidget> createState() => _CategoryViewState();
 }
 
-class _CategoryViewState extends State<CategoryView> {
+class _CategoryViewState extends State<CategoryView>
+    {
+  
   @override
   void initState() {
     super.initState();
+   // SystemChrome.setPreferredOrientations([
+    //  DeviceOrientation.landscapeRight,
+     // DeviceOrientation.landscapeLeft,
+    //]);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       // executes after build
     });
   }
 
   @override
+  void dispose() {
+    //SystemChrome.setPreferredOrientations([
+     // DeviceOrientation.landscapeRight,
+     // DeviceOrientation.landscapeLeft,
+     // DeviceOrientation.portraitUp,
+      //DeviceOrientation.portraitDown,
+   // ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     // final args = ModalRoute.of(context)!.settings.arguments as WidgetParams;
-    String? _appHeader = localizationService().of('application_header');
+    String? _appHeader = LocalizationService().of('application_header');
     return MaterialApp(
       title: _appHeader!,
       home: new Stack(fit: StackFit.expand, children: <Widget>[
         new Image.asset("assets/graphics/light/backphone.jpg",
-            fit: BoxFit.fitHeight),
+            fit: BoxFit.cover),
         Scaffold(
           appBar: AppBar(
-            title: Text(_appHeader!+" : "+CategoryView.header!),
+            title: Text(_appHeader+" : "+CategoryView.header!),
             backgroundColor: Colors.blueGrey.withOpacity(0.3),
           ),
           floatingActionButton: FloatingActionButton(
