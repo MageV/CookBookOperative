@@ -26,9 +26,7 @@ class _RecipesViewState extends State<RecipesView> {
     int _id = args.category_id;
     String _header = args.title;
     String _path=args.path;
-    print(_path);
     _path=_path.replaceAll(".png", "_back.jpg");
-    print(_path);
     return new Stack(
         fit: StackFit.expand,
         children: <Widget>[
