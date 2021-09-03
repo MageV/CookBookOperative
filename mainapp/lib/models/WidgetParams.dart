@@ -1,7 +1,8 @@
 class WidgetParams
 {
   String title;
-  String category_id;
+  int category_id;
+  String path;
 
-  WidgetParams.name(this.title, this.category_id);
+  WidgetParams.name(this.title, this.category_id,this.path);
 }

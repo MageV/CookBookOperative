@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/views/CategoryView.dart';
 import 'package:mainapp/views/mainView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/model.dart';
@@ -32,7 +33,7 @@ void main() {
         }
     }
     DBService.init(DatabaseApplication.dbDao);
-    runApp(MainView());
+    runApp(CategoryView());
   }
   startMeUp();
 }

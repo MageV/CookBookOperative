@@ -332,7 +332,7 @@ class _$DbDao extends DbDao {
   @override
   Future<List<Recipe>?> getRecipeById(int id) async {
     return _queryAdapter.queryList(
-        'select id,header,description from Recipe where id=?1',
+        'select id,header,description,image_path from Recipe where id=?1',
         mapper: (Map<String, Object?> row) => Recipe(
             row['id'] as int,
             row['header'] as String,

@@ -1,58 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
 
+import 'RecipesView.dart';
+import 'SettingsView.dart';
 
-class CategoryView extends StatelessWidget {
+class CategoryView extends StatefulWidget {
+  static final String? header = localizationService().of('CatView_header');
+  static const routeName = "/";
 
-  final String? header=localizationService().of('CatView_header');
-  static const routeName="/CategoryView";
+  @override
+  _CategoryViewState createState() => _CategoryViewState();
+}
+
+class _CategoryViewState extends State<CategoryView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      // executes after build
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final args=ModalRoute.of(context)!.settings.arguments as WidgetParams;
-     return Scaffold(
-        appBar: AppBar(
-          title: Text(header!),
-        ),
-        backgroundColor: Colors.blue,
-        body:Column(
-          children: <Widget>[
-            Expanded(
-                child: FutureBuilder<List<Category?>>(
+    // final args = ModalRoute.of(context)!.settings.arguments as WidgetParams;
+    String? _appHeader = localizationService().of('application_header');
+    return MaterialApp(
+      title: _appHeader!,
+      home: new Stack(fit: StackFit.expand, children: <Widget>[
+        new Image.asset("assets/graphics/light/backphone.jpg",
+            fit: BoxFit.fitHeight),
+        Scaffold(
+          appBar: AppBar(
+            title: Text(_appHeader!+" : "+CategoryView.header!),
+            backgroundColor: Colors.blueGrey.withOpacity(0.3),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.youtube_searched_for),
+            //backgroundColor: Colors.blueGrey,
+            onPressed: _fabPressed,
+            elevation: 5,
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          backgroundColor: Colors.transparent,
+          body: new Center(
+            child: new Container(
+              margin: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.withOpacity(0.25),
+                borderRadius: BorderRadius.all(Radius.circular(50.0))
+              ),
+              child:Column(
+              children: <Widget>[
+                Expanded(
+                    child: FutureBuilder<List<Category?>>(
                   future: dbService().DBdao.getAllCategories(),
-                  builder: (context,snapshot)
-                  {
-                    if(!snapshot.hasData)
-                      return Center(child:CircularProgressIndicator());
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData)
+                      return Center(child: CircularProgressIndicator());
                     return ListView(
                       padding: EdgeInsets.all(3),
                       children: snapshot.data!
-                      .map((e) => Card(
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.white70, width: 1),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: ListTile(
-                          title: Text(e!.header),
-                          onTap: itemTap(e.header),
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage(e.image_path),
-                          ),
-                        ),
-                      )).toList(),
+                          .map((e) => Card(
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Colors.blueGrey.withOpacity(0.8), width: 1),
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: ListTile(
+                                  title: Text(e!.header),
+                                  onTap: () =>
+                                      _itemTap(e.header, e.id,e.image_path, context),
+                                  leading: CircleAvatar(
+                                    backgroundImage: AssetImage(e.image_path),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
                     );
                   },
                 ))
-          ],
+              ],
+            ),
+          ),
+        ),
         )
-      );
+      ]),
+      routes: {
+        RecipesView.routeName: (context) => RecipesView(),
+        SettingsView.routeName: (context) => SettingsView()
+      },
+    );
   }
 
-  itemTap(String item)
-  {
-
+  _itemTap(String item, int id,String path, BuildContext context) {
+    WidgetParams params = new WidgetParams.name(item, id,path);
+    //print("Pushed"+":"+item+":"+id.toString());
+    Future.delayed(Duration.zero, () {
+      Navigator.pushNamed(context, RecipesView.routeName, arguments: params);
+    });
   }
 
+  _fabPressed() {}
 }

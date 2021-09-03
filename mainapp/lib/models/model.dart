@@ -92,7 +92,7 @@ abstract class DbDao
   Future<List<Ingredient>?> getAllIngredients();
   @Query('Select id,header,image_path from Recipe where fk_category=:id order by header')
   Future<List<Recipe>?> getRecipeOfCategory(int id);
-  @Query('select id,header,description from Recipe where id=:id')
+  @Query('select id,header,description,image_path from Recipe where id=:id')
   Future<List<Recipe>?> getRecipeById(int id);
   @Query('select I.id,I.header,I.measure,C.volume'
       'from Ingredient inner join on I.id=c.fk_ingrs where C.fk_recipe=:recid')

@@ -54,7 +54,6 @@ class MainView extends StatelessWidget {
       ),
       routes: {
         RecipesView.routeName:(context) => RecipesView(),
-        MainView.routeName:(context) => MainView(),
         SettingsView.routeName:(context) => SettingsView()
       },
     );
