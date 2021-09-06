@@ -4,17 +4,6 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'model.g.dart';
 
-@Entity(tableName: "parameters")
-class AppParameters
-{
-  @PrimaryKey(autoGenerate: true)
-  final int id;
-  final String name;
-  final String value;
-  AppParameters(this.id, this.name, this.value);
-}
-
-
 @Entity(tableName: 'category')
 class Category
 {
@@ -30,9 +19,7 @@ class Ingredient
   @PrimaryKey(autoGenerate: true)
   final int id;
   final String header;
-  final String measure;
-  final String image_path;
-  Ingredient(this.id, this.header, this.measure,this.image_path);
+  Ingredient(this.id, this.header);
 }
 @Entity(tableName: 'recipe',
 foreignKeys: [
@@ -69,9 +56,10 @@ class Contents {
   @PrimaryKey(autoGenerate: true)
   final int id;
   final double volume;
+  final String measure;
   final int fk_recipe;
   final int fk_ingrs;
-  Contents(this.id, this.volume, this.fk_recipe, this.fk_ingrs);
+  Contents(this.id, this.volume,this.measure, this.fk_recipe, this.fk_ingrs);
 }
 
 
@@ -79,30 +67,31 @@ class Contents {
 @dao
 abstract class DbDao
 {
-  @Query('select value from parameters where name=:name')
-  Future<List<String>?> getAppParameter(String name);
-  @Query('select * from parameters')
-  Future<List<AppParameters>> getAppParameters();
   @Query('select count(*) from category')
   Future<int?> getCategoryCount();
+
   @Query('SELECT * from Category order by header')
   Future<List<Category?>> getAllCategories();
+
   @Query('SELECT * from Ingredient order by header')
   Future<List<Ingredient>?> getAllIngredients();
+
   @Query('Select id,header,image_path from Recipe where fk_category=:id order by header')
   Future<List<Recipe>?> getRecipeOfCategory(int id);
+
   @Query('select id,header,description,image_path from Recipe where id=:id')
   Future<List<Recipe>?> getRecipeById(int id);
-  @Query('select I.id,I.header,I.measure,C.volume'
-      'from Ingredient inner join on I.id=c.fk_ingrs where C.fk_recipe=:recid')
+
+  @Query('select I.id,I.header,c.measure,C.volume'
+      'from Ingredient I,Contents c inner join on I.id=c.fk_ingrs where C.fk_recipe=:recid')
   Future<List<dynamic>?> selectDetailedRecipe(int recid);
 
-  @insert
-  Future<List<int>?> insertAppParameters(List<AppParameters> items);
-  @update
-  Future<int?> UpdateAppParameters(List<AppParameters> items);
-  @delete
-  Future<int?> deleteAppParameters(List<AppParameters> items);
+  @Query('select description from recipe where id=:recid')
+  Future<List<dynamic>?> selectDescRecipe(int recid);
+
+  @Query('select count(*) from ingredients')
+  Future<int?> getIngredientsCount();
+
   @insert
   Future<List<int>?> insertCategories(List<Category> items);
   @update
@@ -129,7 +118,7 @@ abstract class DbDao
   Future<int?> deleteContents(List<Contents> items);
 }
 
-@Database(version:1,entities:[Category,Ingredient,Recipe,Contents,AppParameters])
+@Database(version:1,entities:[Category,Ingredient,Recipe,Contents])
 abstract class AppDatabase extends FloorDatabase
 {
   DbDao get dbDao;

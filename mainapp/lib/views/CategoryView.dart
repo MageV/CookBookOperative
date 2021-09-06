@@ -52,7 +52,7 @@ class _CategoryViewState extends State<CategoryView>
     return MaterialApp(
       title: _appHeader!,
       home: new Stack(fit: StackFit.expand, children: <Widget>[
-        new Image.asset("assets/graphics/light/backphone.jpg",
+        new Image.asset("assets/graphics/light/backphone2.jpg",
             fit: BoxFit.cover),
         Scaffold(
           appBar: AppBar(

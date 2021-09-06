@@ -1,7 +1,9 @@
+
 class LocalizationService {
   LocalizationService._privateConstructor();
   static late var defaultLanguage;
   static const allowedLang = ['en_US', 'ru_RU'];
+
   static Map<String, Map<String, String>> langValues = {
     'en_US': {
       'CatView_header': 'Recipes Category',
@@ -22,7 +24,12 @@ class LocalizationService {
       'dialog_item_new_header': 'Enter recipe',
       'dialog_item_ok': 'OK',
       'dialog_item_cancel': 'Cancel',
-      'application_header':'My cookbook'
+      'application_header':'My cookbook',
+      'recipe_header':'Recipe',
+      'recipe_toc':'Ingredients',
+      'recipe desc':'Description',
+      'recipe_photo':'Photo',
+      'recipe_no_data':'This field must be filled'
     },
     'ru_RU': {
       'CatView_header': 'Категории',
@@ -42,7 +49,12 @@ class LocalizationService {
       'dialog_item_new_header': 'Ввод рецепта',
       'dialog_item_ok': 'OK',
       'dialog_item_cancel': 'Отмена',
-      'application_header':'Книга рецептов'
+      'application_header':'Книга рецептов',
+      'recipe_header':'Название',
+      'recipe_toc':'Ингредиенты',
+      'recipe desc':'Описание',
+      'recipe_photo':'Фотография',
+      'recipe_no_data':'Поле должно быть заполнено'
     }
   };
   static final LocalizationService _instance =

@@ -78,7 +78,9 @@ class _RecipesViewState extends State<RecipesView> {
 
   _itemTap(String header, int id, BuildContext context) {}
 
-  _runManual() {}
+  _runManual() {
+
+  }
   _runCamera() {}
 
   _fabPressed(BuildContext context) {
