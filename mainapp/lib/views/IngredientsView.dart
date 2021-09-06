@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class InredientsView extends StatelessWidget
+class IngredientsView extends StatelessWidget
 {
   @override
   Widget build(BuildContext context) {
