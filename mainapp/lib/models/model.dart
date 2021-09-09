@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:floor/floor.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
@@ -68,13 +69,16 @@ class Contents {
 abstract class DbDao
 {
   @Query('select count(*) from category')
-  Future<int?> getCategoryCount();
+  Future<Int16?> getCategoryCount();
 
-  @Query('SELECT * from Category order by header')
+  @Query('SELECT * from category order by header')
   Future<List<Category?>> getAllCategories();
 
-  @Query('SELECT * from Ingredient order by header')
-  Future<List<Ingredient>?> getAllIngredients();
+  @Query('SELECT * from ingredient order by header')
+  Future<List<Ingredient?>> getAllIngredients();
+
+  @Query('SELECT * from ingredient where header like :startwith')
+  Future<List<Ingredient?>> getIngredientOf(String startwith);
 
   @Query('Select id,header,image_path from Recipe where fk_category=:id order by header')
   Future<List<Recipe>?> getRecipeOfCategory(int id);
@@ -89,15 +93,25 @@ abstract class DbDao
   @Query('select description from recipe where id=:recid')
   Future<List<dynamic>?> selectDescRecipe(int recid);
 
-  @Query('select count(*) from ingredients')
+  @Query('select count(*) from ingredient')
   Future<int?> getIngredientsCount();
 
+  @Query ('select max(id) from category')
+  Future<int?> getLastIDCategory();
+  @Query ('select max(id) from ingredient')
+  Future<int?> getLastIDIngredient();
+
   @insert
+  @OnConflictStrategy.replace
   Future<List<int>?> insertCategories(List<Category> items);
   @update
   Future<int?> UpdateCategories(List<Category> items);
   @insert
+  @OnConflictStrategy.replace
   Future<List<int>?> insertIngredients(List<Ingredient> items);
+  @insert
+  @OnConflictStrategy.replace
+  Future<int> insertIngredient(Ingredient item);
   @update
   Future<int?> UpdateIngredients(List<Ingredient> items);
   @insert

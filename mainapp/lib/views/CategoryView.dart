@@ -4,6 +4,7 @@ import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/views/IngredientsView.dart';
 
 
 import 'RecipesView.dart';
@@ -51,7 +52,8 @@ class _CategoryViewState extends State<CategoryView>
     String? _appHeader = LocalizationService().of('application_header');
     return MaterialApp(
       title: _appHeader!,
-      home: new Stack(fit: StackFit.expand, children: <Widget>[
+      home:Builder(
+          builder:(context) => Stack(fit: StackFit.expand, children: <Widget>[
         new Image.asset("assets/graphics/light/backphone2.jpg",
             fit: BoxFit.cover),
         Scaffold(
@@ -82,39 +84,62 @@ class _CategoryViewState extends State<CategoryView>
                     child: FutureBuilder<List<Category?>>(
                   future: dbService().DBdao.getAllCategories(),
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData)
+                    if (!snapshot.hasData) {
                       return Center(child: CircularProgressIndicator());
-                    return ListView(
-                      padding: EdgeInsets.all(3),
-                      children: snapshot.data!
-                          .map((e) => Card(
-                                elevation: 2,
-                                shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                        color: Colors.blueGrey.withOpacity(0.8), width: 1),
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: ListTile(
-                                  title: Text(e!.header),
-                                  onTap: () =>
-                                      _itemTap(e.header, e.id,e.image_path, context),
-                                  leading: CircleAvatar(
-                                    backgroundImage: AssetImage(e.image_path),
-                                  ),
+                    }
+                    else {
+                      print("categories got this");
+                      print("category.count:"+snapshot.data!.length.toString());
+                      return ListView(
+                        padding: EdgeInsets.all(3),
+                        children: snapshot.data!
+                            .map((e) =>
+                            Card(
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      color: Colors.blueGrey.withOpacity(0.8),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: ListTile(
+                                title: Text(e!.header),
+                                onTap: () =>
+                                    _itemTap(
+                                        e.header, e.id, e.image_path, context),
+                                leading: CircleAvatar(
+                                  backgroundImage: AssetImage(e.image_path),
                                 ),
-                              ))
-                          .toList(),
-                    );
+                              ),
+                            ))
+                            .toList(),
+                      );
+                    }
                   },
                 ))
               ],
             ),
           ),
         ),
+          bottomNavigationBar: BottomAppBar(
+            child: new Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children:<Widget> [
+                IconButton(
+                    icon: Icon(Icons.description), onPressed: () {
+                      _iconPressedIngredients(context); },
+
+                )
+              ],
+            )
+          ),
         )
-      ]),
+      ])),
       routes: {
         RecipesView.routeName: (context) => RecipesView(),
-        SettingsView.routeName: (context) => SettingsView()
+        IngredientsView.routeName:(context)=>IngredientsView(),
+        SettingsView.routeName: (context) => SettingsView(),
+
       },
     );
   }
@@ -128,4 +153,9 @@ class _CategoryViewState extends State<CategoryView>
   }
 
   _fabPressed() {}
+  _iconPressedIngredients(BuildContext context){
+    Future.delayed(Duration.zero, () {
+      Navigator.pushNamed(context, IngredientsView.routeName,arguments: null);
+    });
+  }
 }

@@ -243,22 +243,31 @@ class _$DbDao extends DbDao {
   final DeletionAdapter<Contents> _contentsDeletionAdapter;
 
   @override
-  Future<int?> getCategoryCount() async {
+  Future<Int16?> getCategoryCount() async {
     await _queryAdapter.queryNoReturn('select count(*) from category');
   }
 
   @override
   Future<List<Category?>> getAllCategories() async {
-    return _queryAdapter.queryList('SELECT * from Category order by header',
+    return _queryAdapter.queryList('SELECT * from category order by header',
         mapper: (Map<String, Object?> row) => Category(row['id'] as int,
             row['header'] as String, row['image_path'] as String));
   }
 
   @override
-  Future<List<Ingredient>?> getAllIngredients() async {
-    return _queryAdapter.queryList('SELECT * from Ingredient order by header',
+  Future<List<Ingredient?>> getAllIngredients() async {
+    return _queryAdapter.queryList('SELECT * from ingredient order by header',
         mapper: (Map<String, Object?> row) =>
             Ingredient(row['id'] as int, row['header'] as String));
+  }
+
+  @override
+  Future<List<Ingredient?>> getIngredientOf(String startwith) async {
+    return _queryAdapter.queryList(
+        'SELECT * from ingredient where header like ?1',
+        mapper: (Map<String, Object?> row) =>
+            Ingredient(row['id'] as int, row['header'] as String),
+        arguments: [startwith]);
   }
 
   @override
@@ -298,7 +307,17 @@ class _$DbDao extends DbDao {
 
   @override
   Future<int?> getIngredientsCount() async {
-    await _queryAdapter.queryNoReturn('select count(*) from ingredients');
+    await _queryAdapter.queryNoReturn('select count(*) from ingredient');
+  }
+
+  @override
+  Future<int?> getLastIDCategory() async {
+    await _queryAdapter.queryNoReturn('select max(id) from category');
+  }
+
+  @override
+  Future<int?> getLastIDIngredient() async {
+    await _queryAdapter.queryNoReturn('select max(id) from ingredient');
   }
 
   @override
@@ -311,6 +330,12 @@ class _$DbDao extends DbDao {
   Future<List<int>> insertIngredients(List<Ingredient> items) {
     return _ingredientInsertionAdapter.insertListAndReturnIds(
         items, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<int> insertIngredient(Ingredient item) {
+    return _ingredientInsertionAdapter.insertAndReturnId(
+        item, OnConflictStrategy.abort);
   }
 
   @override

@@ -1,10 +1,63 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:mainapp/models/model.dart';
+import 'package:mainapp/services/dbService.dart';
+import 'package:mainapp/services/localizationService.dart';
 
-class IngredientsView extends StatelessWidget
-{
+class IngredientsView extends StatefulWidget {
+  const IngredientsView({Key? key}) : super(key: key);
+
+  static const routeName = '/IngredientsView';
+
+  @override
+  _IngredientsViewState createState() => _IngredientsViewState();
+}
+
+class _IngredientsViewState extends State<IngredientsView> {
+  String? _appHeader = LocalizationService().of('application_header');
+  final scrollDirection = Axis.vertical;
+
+
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text(_appHeader!),
+          backgroundColor: Colors.blueGrey.withOpacity(0.3),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          //backgroundColor: Colors.blueGrey,
+          onPressed: _fabPressed,
+          elevation: 5,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: FutureBuilder<List<Ingredient?>>(
+            future: dbService().DBdao.getAllIngredients(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return ListView(
+                    scrollDirection: scrollDirection,
+                    children:<Widget>[
+
+                    ]
+                );
+              }
+            })
+    );
   }
+
+  _fabPressed() {}
 }

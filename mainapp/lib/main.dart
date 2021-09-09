@@ -5,6 +5,7 @@ import 'package:mainapp/services/localizationService.dart';
 import 'package:mainapp/views/CategoryView.dart';
 import 'models/model.dart';
 
+
 const int Categories=7;
 var LocaleService=LocalizationService();
 var DBService=dbService();
@@ -17,7 +18,9 @@ void main() {
   //print(defaultLocale);
   startMeUp() async
   {
-    final DatabaseApplication=await $FloorAppDatabase.databaseBuilder('com.magev.cookbook.sqlite').build();
+
+    final databaseApplication=await $FloorAppDatabase.
+    databaseBuilder("com.magev.cookbook.sqlite").build();
     switch(defaultLocale)
     {
       case "en_US":
@@ -30,7 +33,7 @@ void main() {
           LocaleService.init(defaultLocale);
         }
     }
-    DBService.init(DatabaseApplication.dbDao);
+    DBService.init(databaseApplication.dbDao);
     runApp(CategoryView());
   }
   startMeUp();

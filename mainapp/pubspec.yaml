@@ -35,8 +35,11 @@ dependencies:
   shared_preferences: any
   path: any
   cloud_firestore: ^2.5.1
-  csv: ^5.0.0
-  master_detail_scaffold: ^1.1.1+2
+  sticky_headers: ^0.2.0
+  progress_dialog: ^1.2.4
+  xml: ^5.1.2
+  floor_annotation: ^1.0.0
+  alphabet_list_scroll_view: ^2.0.0
   #intl: ^0.17.0
  # flutter_localizations: # Add this line
  #   sdk: flutter
