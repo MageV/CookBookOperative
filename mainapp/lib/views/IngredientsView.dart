@@ -12,13 +12,27 @@ class IngredientsView extends StatefulWidget {
   _IngredientsViewState createState() => _IngredientsViewState();
 }
 
+
+
 class _IngredientsViewState extends State<IngredientsView> {
   String? _appHeader = LocalizationService().of('application_header');
-  final scrollDirection = Axis.vertical;
+  List<Ingredient> ingrList = [];
+  List<String> strList = [];
+  List<Widget> favouriteList = [];
+  List<Widget> normalList = [];
+  TextEditingController searchController = TextEditingController();
 
+  filterList()
+  {
+    List<Ingredient> ingredients=[];
+    ingredients.addAll(ingrList);
+  }
 
   @override
   initState() {
+    searchController.addListener(() {
+      filterList();
+    });
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {});
   }
@@ -48,12 +62,7 @@ class _IngredientsViewState extends State<IngredientsView> {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               } else {
-                return ListView(
-                    scrollDirection: scrollDirection,
-                    children:<Widget>[
 
-                    ]
-                );
               }
             })
     );
