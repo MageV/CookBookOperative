@@ -1,13 +1,15 @@
+import 'package:mainapp/services/dbService.dart';
 
 class LocalizationService {
   LocalizationService._privateConstructor();
   static late var defaultLanguage;
   static const allowedLang = ['en_US', 'ru_RU'];
+  late Map<String,String> _appStrings;
 
-  static Map<String, Map<String, String>> langValues = {
+ /* static Map<String, Map<String, String>> langValues = {
     'en_US': {
       'CatView_header': 'Recipes Category',
-      'RecView_header': 'Rec',
+      'RecView_header': 'Recipes',
       'cat_1': 'Appetizers',
       'cat_2': 'Soups',
       'cat_3': 'Main',
@@ -69,22 +71,23 @@ class LocalizationService {
       'recipe_cam_step3_subtitle':'Наведите объектив на изображение блюда \n и нажмите красную кнопку',
 
 }
-  };
+  };*/
   static final LocalizationService _instance =
       LocalizationService._privateConstructor();
 
   factory LocalizationService() {
     return _instance;
   }
-  void init(String locale) {
+  void init(String locale) async{
     if (allowedLang.contains(locale)) {
       defaultLanguage = locale;
     } else
       defaultLanguage = allowedLang[0];
+    _appStrings=await dbService.parseAppXml(true);
   }
 
   String? of(String name) {
-    return langValues[defaultLanguage]![name];
+    return _appStrings[name];
   }
 
   String getDefaultLocale() => defaultLanguage;

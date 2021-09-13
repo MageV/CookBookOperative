@@ -1,17 +1,19 @@
-
 import 'package:mainapp/main.dart';
 import 'package:mainapp/models/model.dart';
-import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/services/LocalizationService.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' as io;
 import 'package:xml/xml.dart';
+
+enum xmlResType { resType_GlossaryIngredient, resType_AppStrings }
 
 class dbService {
   dbService._privateConstructor();
   late var Preferences;
   late DbDao DBdao;
   late SharedPreferences ApplicationParameters;
+
   static final dbService _instance = dbService._privateConstructor();
   factory dbService() {
     return _instance;
@@ -29,33 +31,47 @@ class dbService {
         String? cat = LocalizationService().of(name);
         print(name);
         print(cat);
-        items.add(new Category(i,cat!, path));
+        items.add(new Category(i, cat!, path));
       }
       await dao.insertCategories(items);
       await ApplicationParameters.setBool("INIT", true);
-      List<String> _raw = await _parseIngredients(true);
+      List<String> _raw = await parseXml(true);
       List<Ingredient> _ingredients = [];
       int id = 1;
-      for(int i=0;i<_raw.length;i++)
-      {
-        Ingredient ingredient = new Ingredient(i,_raw[i]);
-        int ids=await dao.insertIngredient(ingredient);
-        print("ids:"+ids.toString());
+      for (int i = 0; i < _raw!.length; i++) {
+        Ingredient ingredient = new Ingredient(i, _raw[i]);
+        int ids = await dao.insertIngredient(ingredient);
+        print("ids:" + ids.toString());
       }
     }
   }
 
-  Future<List<String>> _parseIngredients(bool fromFile) async {
+  static Future<List<String>> parseXml(bool fromFile) async {
     final List<String> output = [];
     Iterable<XmlElement> elements = [];
     if (fromFile) {
       output.clear();
-      String xmlString=await rootBundle.loadString('assets/data/ingredients_rus.xml');
-      final document=XmlDocument.parse(xmlString);
-      elements =  document.findAllElements("row");
+      String filename = 'assets/data/ingredients_' + defaultLocale + '.xml';
+      String xmlString = await rootBundle.loadString(filename);
+      final document = XmlDocument.parse(xmlString);
+      elements = document.findAllElements("row");
       elements.forEach((element) {
         output.add(element.text);
       });
+    }
+    return output;
+  }
+
+  static Future<Map<String, String>> parseAppXml(bool fromFile) async {
+    Iterable<XmlElement> elements = [];
+    final Map<String, String> output = new Map<String, String>();
+    if (fromFile) {
+      String filename = 'assets/data/appstring_' + defaultLocale + '.xml';
+      String xmlString = await rootBundle.loadString(filename);
+      final document = XmlDocument.parse(xmlString);
+      elements = document.findAllElements("item");
+      elements.forEach((element) =>
+          output.putIfAbsent(element.name.toString(), () => element.text));
     }
     return output;
   }

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<root>
+    <item name="CatView_header">Категории</item>
+    <item name="RecView_header">Рецепты</item>
+    <item name="cat_1">Закуски</item>
+    <item name="cat_2">Супы</item>
+    <item name="cat_3">Горячее</item>
+    <item name="cat_4">Напитки</item>
+    <item name="cat_5">Выпечка</item>
+    <item name="cat_6">Мороженое</item>
+    <item name="cat_7">Сладкое</item>
+    <item name="header_1">Категории</item>
+    <item name="header_2">Новости</item>
+    <item name="header_3">Настройки</item>
+    <item name="header_4">Поиск</item>
+    <item name="dialog_item_new_manual">Вручную</item>
+    <item name="dialog_item_new_camera">Камера</item>
+    <item name="dialog_item_new_header">Ввод рецепта</item>
+    <item name="dialog_item_ok">OK</item>
+    <item name="dialog_item_cancel">Отмена</item>
+    <item name="application_header">Книга рецептов</item>
+    <item name="recipe_header">Название</item>
+    <item name="recipe_toc">Ингредиенты</item>
+    <item name="recipe desc">Описание</item>
+    <item name="recipe_photo">Фотография</item>
+    <item name="recipe_no_data">Поле должно быть заполнено</item>
+    <item name="recipe_cam_step1_title">Сканирование ингредиентов</item>
+    <item name="recipe_cam_step2_title">Сканирование процесса приготовления</item>
+    <item name="recipe_cam_step3_title">Сканирование изображения блюда</item>
+    <item name="recipe_cam_step1_subtitle">Наведите объектив на перечень ингредиентов \n и нажмите красную кнопку</item>
+    <item name="recipe_cam_step2_subtitle">Наведите объектив на процесс приготовления \n и нажмите красную кнопку</item>
+    <item name="recipe_cam_step3_subtitle">Наведите объектив на изображение блюда \n и нажмите красную кнопку</item>
+</root>

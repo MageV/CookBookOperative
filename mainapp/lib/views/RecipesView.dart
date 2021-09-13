@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
-import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/services/LocalizationService.dart';
 
 import 'RecipeItemManual.dart';
 

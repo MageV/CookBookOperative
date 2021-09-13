@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mainapp/services/dbService.dart';
-import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/services/LocalizationService.dart';
 import 'package:mainapp/views/CategoryView.dart';
 import 'models/model.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mainapp/services/localizationService.dart';
+import 'package:mainapp/services/LocalizationService.dart';
 
 class RecipeItemManual extends StatefulWidget {
   RecipeItemManual({Key? key}) : super(key: key);
