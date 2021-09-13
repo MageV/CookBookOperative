@@ -4,6 +4,8 @@ import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
 
+import 'RecipeItemManual.dart';
+
 class RecipesView extends StatefulWidget {
   const RecipesView({Key? key}) : super(key: key);
   static const routeName = '/RecipesView';
@@ -78,10 +80,15 @@ class _RecipesViewState extends State<RecipesView> {
 
   _itemTap(String header, int id, BuildContext context) {}
 
-  _runManual() {
+  _runManual(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      Navigator.pushNamed(context, RecipeItemManual.routeName, arguments: null);
+    });
 
   }
-  _runCamera() {}
+  _runCamera(BuildContext context) {
+
+  }
 
   _fabPressed(BuildContext context) {
     String? dialogHeader = LocalizationService().of('dialog_item_new_header');
@@ -96,7 +103,7 @@ class _RecipesViewState extends State<RecipesView> {
             title: Text(dialogHeader!),
             children: <Widget>[
               SimpleDialogOption(
-                  onPressed: () => _runManual(),
+                  onPressed: () => _runManual(context),
                   child: Card(
                       elevation: 2,
                       shape: RoundedRectangleBorder(
@@ -107,7 +114,7 @@ class _RecipesViewState extends State<RecipesView> {
                         leading: CircleAvatar(child: Icon(Icons.waves)),
                       ))),
               SimpleDialogOption(
-                  onPressed: () => _runCamera(),
+                  onPressed: () => _runCamera(context),
                   child: Card(
                       elevation: 2,
                       shape: RoundedRectangleBorder(

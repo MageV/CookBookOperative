@@ -1,4 +1,6 @@
+import 'package:alphabet_list_scroll_view/alphabet_list_scroll_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
@@ -12,8 +14,6 @@ class IngredientsView extends StatefulWidget {
   _IngredientsViewState createState() => _IngredientsViewState();
 }
 
-
-
 class _IngredientsViewState extends State<IngredientsView> {
   String? _appHeader = LocalizationService().of('application_header');
   List<Ingredient> ingrList = [];
@@ -22,10 +22,26 @@ class _IngredientsViewState extends State<IngredientsView> {
   List<Widget> normalList = [];
   TextEditingController searchController = TextEditingController();
 
-  filterList()
-  {
-    List<Ingredient> ingredients=[];
+  filterList() {
+    List<Ingredient> ingredients = [];
     ingredients.addAll(ingrList);
+    ingredients.sort(
+        (a, b) => a.header.toLowerCase().compareTo(b.header.toLowerCase()));
+    normalList = [];
+    strList = [];
+    if (searchController.text.isNotEmpty) {
+      ingredients.retainWhere((element) => element.header
+          .toLowerCase()
+          .contains(searchController.text.toLowerCase()));
+    }
+    ingredients.forEach((element) {
+      normalList.add(Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: Text(element.header)));
+      strList.add(element.header);
+    });
+    setState(() {});
   }
 
   @override
@@ -62,7 +78,39 @@ class _IngredientsViewState extends State<IngredientsView> {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               } else {
-
+                snapshot.data!.map((e) => normalList).toList();
+                return AlphabetListScrollView(
+                  strList: strList,
+                  highlightTextStyle: TextStyle(
+                    color: Colors.orange,
+                  ),
+                  showPreview: true,
+                  itemBuilder: (context, index) {
+                    return normalList[index];
+                  },
+                  indexedHeight: (i) {
+                    return 80;
+                  },
+                  keyboardUsage: true,
+                  headerWidgetList: <AlphabetScrollListHeader>[
+                    AlphabetScrollListHeader(widgetList: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextFormField(
+                          controller: searchController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            suffix: Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                            labelText: "Search",
+                          ),
+                        ),
+                      )
+                    ], icon: Icon(Icons.search), indexedHeaderHeight: (index) => 80),
+                  ],
+                );
               }
             })
     );

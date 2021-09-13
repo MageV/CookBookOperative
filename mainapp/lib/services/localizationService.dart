@@ -29,7 +29,13 @@ class LocalizationService {
       'recipe_toc':'Ingredients',
       'recipe desc':'Description',
       'recipe_photo':'Photo',
-      'recipe_no_data':'This field must be filled'
+      'recipe_no_data':'This field must be filled',
+      'recipe_cam_step1_title':'Obtain ingredients',
+      'recipe_cam_step2_title':'Obtain process',
+      'recipe_cam_step3_title':'Obtain picture',
+      'recipe_cam_step1_subtitle':'Put ingredients section in camera box \n below and press red button',
+      'recipe_cam_step2_subtitle':'Put process description in camera box \n below and press red button',
+      'recipe_cam_step3_subtitle':'Put result picture in camera box \n belo and press red button',
     },
     'ru_RU': {
       'CatView_header': 'Категории',
@@ -54,8 +60,15 @@ class LocalizationService {
       'recipe_toc':'Ингредиенты',
       'recipe desc':'Описание',
       'recipe_photo':'Фотография',
-      'recipe_no_data':'Поле должно быть заполнено'
-    }
+      'recipe_no_data':'Поле должно быть заполнено',
+      'recipe_cam_step1_title':'Сканирование ингредиентов',
+      'recipe_cam_step2_title':'Сканирование процесса приготовления',
+      'recipe_cam_step3_title':'Сканирование изображения блюда',
+      'recipe_cam_step1_subtitle':'Наведите объектив на перечень ингредиентов \n и нажмите красную кнопку',
+      'recipe_cam_step2_subtitle':'Наведите объектив на процесс приготовления \n и нажмите красную кнопку',
+      'recipe_cam_step3_subtitle':'Наведите объектив на изображение блюда \n и нажмите красную кнопку',
+
+}
   };
   static final LocalizationService _instance =
       LocalizationService._privateConstructor();

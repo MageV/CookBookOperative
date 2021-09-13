@@ -5,8 +5,10 @@ import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
 import 'package:mainapp/services/localizationService.dart';
 import 'package:mainapp/views/IngredientsView.dart';
+import 'package:mainapp/views/RecipeItemCamera.dart';
 
 
+import 'RecipeItemManual.dart';
 import 'RecipesView.dart';
 import 'SettingsView.dart';
 
@@ -139,6 +141,7 @@ class _CategoryViewState extends State<CategoryView>
         RecipesView.routeName: (context) => RecipesView(),
         IngredientsView.routeName:(context)=>IngredientsView(),
         SettingsView.routeName: (context) => SettingsView(),
+        RecipeItemManual.routeName:(context)=>RecipeItemManual(),
 
       },
     );

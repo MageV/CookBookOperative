@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mainapp/services/localizationService.dart';
 
-class RecipeItem extends StatefulWidget {
-  RecipeItem({required Key key}) : super(key: key);
+class RecipeItemManual extends StatefulWidget {
+  RecipeItemManual({Key? key}) : super(key: key);
+
+  static const routeName = '/RecipeItemManual';
   @override
-  _RecipeItemState createState() => _RecipeItemState();
+  _RecipeItemManualState createState() => _RecipeItemManualState();
 }
 
-class _RecipeItemState extends State<RecipeItem> {
-  GlobalKey<_RecipeItemState> _key=GlobalKey<_RecipeItemState>();
+class _RecipeItemManualState extends State<RecipeItemManual> {
+  GlobalKey<_RecipeItemManualState> _key=GlobalKey<_RecipeItemManualState>();
   @override
   Widget build(BuildContext context) {
     return Container(
