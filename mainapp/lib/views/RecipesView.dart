@@ -4,6 +4,7 @@ import 'package:mainapp/models/model.dart';
 
 
 import '../main.dart';
+import 'RecipeItemCamera.dart';
 import 'RecipeItemManual.dart';
 
 class RecipesView extends StatefulWidget {
@@ -87,7 +88,9 @@ class _RecipesViewState extends State<RecipesView> {
 
   }
   _runCamera(BuildContext context) {
-
+    Future.delayed(Duration.zero, () {
+      Navigator.pushNamed(context, RecipeItemCamera.routeName, arguments: null);
+    });
   }
 
   _fabPressed(BuildContext context) {

@@ -145,6 +145,7 @@ class _CategoryViewState extends State<CategoryView> {
         IngredientsView.routeName: (context) => IngredientsView(),
         SettingsView.routeName: (context) => SettingsView(),
         RecipeItemManual.routeName:(context)=>RecipeItemManual(),
+        RecipeItemCamera.routeName:(context)=>RecipeItemCamera()
 
       },
     );
