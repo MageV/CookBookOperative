@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
-import 'package:mainapp/services/dbService.dart';
-import 'package:mainapp/services/LocalizationService.dart';
 import 'package:mainapp/views/IngredientsView.dart';
 import 'package:mainapp/views/RecipeItemCamera.dart';
-
-
+import '../main.dart';
 import 'RecipeItemManual.dart';
 import 'RecipesView.dart';
 import 'SettingsView.dart';
 
 class CategoryView extends StatefulWidget {
   const CategoryView({Key? key}) : super(key: key);
-  static final String? header = LocalizationService().of('CatView_header');
+  static final String? header = LocaleService.of('CatView_header');
   static const routeName = "/";
 
   @override
@@ -49,7 +46,7 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     // final args = ModalRoute.of(context)!.settings.arguments as WidgetParams;
-    String? _appHeader = LocalizationService().of('application_header');
+    String? _appHeader =  LocaleService.of('application_header');
     return MaterialApp(
       title: _appHeader!,
       home: Builder(
@@ -83,7 +80,7 @@ class _CategoryViewState extends State<CategoryView> {
                         children: <Widget>[
                           Expanded(
                               child: FutureBuilder<List<Category?>>(
-                                future: dbService().DBdao.getAllCategories(),
+                                future: DBService.DBdao.getAllCategories(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(

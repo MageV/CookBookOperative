@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mainapp/models/model.dart';
 import 'package:mainapp/services/dbService.dart';
-import 'package:mainapp/services/LocalizationService.dart';
+
+import '../main.dart';
+
 
 class IngredientsView extends StatefulWidget {
   const IngredientsView({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class IngredientsView extends StatefulWidget {
 }
 
 class _IngredientsViewState extends State<IngredientsView> {
-  String? _appHeader = LocalizationService().of('application_header');
+  String? _appHeader = LocaleService.of('application_header');
   List<Ingredient> ingrList = [];
   List<String> strList = [];
   List<Widget> favouriteList = [];

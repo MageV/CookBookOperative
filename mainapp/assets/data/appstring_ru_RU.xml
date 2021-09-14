@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <root>
+    <item name="application_header">Моя поваренная книга</item>
     <item name="CatView_header">Категории</item>
     <item name="RecView_header">Рецепты</item>
     <item name="cat_1">Закуски</item>

@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' as io;
 import 'package:xml/xml.dart';
 
-enum xmlResType { resType_GlossaryIngredient, resType_AppStrings }
+import 'ioService.dart';
+
 
 class dbService {
   dbService._privateConstructor();
@@ -18,7 +19,7 @@ class dbService {
   factory dbService() {
     return _instance;
   }
-  init(DbDao dao) async {
+  Future<void> Init(DbDao dao) async {
     DBdao = dao;
     ApplicationParameters = await SharedPreferences.getInstance();
     bool initialized = ApplicationParameters.getBool("INIT") ?? false;
@@ -35,10 +36,10 @@ class dbService {
       }
       await dao.insertCategories(items);
       await ApplicationParameters.setBool("INIT", true);
-      List<String> _raw = await parseXml(true);
+      List<String> _raw = await ioService().parseXml(true);
       List<Ingredient> _ingredients = [];
       int id = 1;
-      for (int i = 0; i < _raw!.length; i++) {
+      for (int i = 0; i < _raw.length; i++) {
         Ingredient ingredient = new Ingredient(i, _raw[i]);
         int ids = await dao.insertIngredient(ingredient);
         print("ids:" + ids.toString());
@@ -46,33 +47,5 @@ class dbService {
     }
   }
 
-  static Future<List<String>> parseXml(bool fromFile) async {
-    final List<String> output = [];
-    Iterable<XmlElement> elements = [];
-    if (fromFile) {
-      output.clear();
-      String filename = 'assets/data/ingredients_' + defaultLocale + '.xml';
-      String xmlString = await rootBundle.loadString(filename);
-      final document = XmlDocument.parse(xmlString);
-      elements = document.findAllElements("row");
-      elements.forEach((element) {
-        output.add(element.text);
-      });
-    }
-    return output;
-  }
 
-  static Future<Map<String, String>> parseAppXml(bool fromFile) async {
-    Iterable<XmlElement> elements = [];
-    final Map<String, String> output = new Map<String, String>();
-    if (fromFile) {
-      String filename = 'assets/data/appstring_' + defaultLocale + '.xml';
-      String xmlString = await rootBundle.loadString(filename);
-      final document = XmlDocument.parse(xmlString);
-      elements = document.findAllElements("item");
-      elements.forEach((element) =>
-          output.putIfAbsent(element.name.toString(), () => element.text));
-    }
-    return output;
-  }
 }

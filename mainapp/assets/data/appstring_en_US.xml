@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <root>
+    <item name="application_header">My cookbook</item>
     <item name="CatView_header">Recipes Category</item>
     <item name="RecView_header">Recipes</item>
     <item name="cat_1">Appetizers</item>

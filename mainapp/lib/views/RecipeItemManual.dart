@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mainapp/services/LocalizationService.dart';
+
+import '../main.dart';
+
 
 class RecipeItemManual extends StatefulWidget {
   RecipeItemManual({Key? key}) : super(key: key);
@@ -19,12 +21,12 @@ class _RecipeItemManualState extends State<RecipeItemManual> {
       autovalidateMode:AutovalidateMode.always,
           child: new Column(
             children: <Widget>[
-              new Text(LocalizationService().of('recipe_header')!),
+              new Text(LocaleService.of('recipe_header')!),
               new TextFormField(validator: (value){
-                if(value!.isEmpty) return LocalizationService().of('recipe_no_data');
+                if(value!.isEmpty) return LocaleService.of('recipe_no_data');
               },
               ),
-              new Text(LocalizationService().of('recipe_toc')!),
+              new Text(LocaleService.of('recipe_toc')!),
 
             ],
           ),

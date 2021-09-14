@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
-import 'package:mainapp/services/dbService.dart';
-import 'package:mainapp/services/LocalizationService.dart';
 
+
+import '../main.dart';
 import 'RecipeItemManual.dart';
 
 class RecipesView extends StatefulWidget {
@@ -48,7 +48,7 @@ class _RecipesViewState extends State<RecipesView> {
           children: <Widget>[
             Expanded(
                 child: FutureBuilder<List<Recipe>?>(
-                    future: dbService().DBdao.getRecipeOfCategory(_id),
+                    future: DBService.DBdao.getRecipeOfCategory(_id),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return Center(child: CircularProgressIndicator());
@@ -91,10 +91,10 @@ class _RecipesViewState extends State<RecipesView> {
   }
 
   _fabPressed(BuildContext context) {
-    String? dialogHeader = LocalizationService().of('dialog_item_new_header');
-    String? optionsMan = LocalizationService().of('dialog_item_new_manual');
-    String? optionsCam = LocalizationService().of('dialog_item_new_camera');
-    String? dialogCancel = LocalizationService().of('dialog_item_cancel');
+    String? dialogHeader = LocaleService.of('dialog_item_new_header');
+    String? optionsMan = LocaleService.of('dialog_item_new_manual');
+    String? optionsCam = LocaleService.of('dialog_item_new_camera');
+    String? dialogCancel = LocaleService.of('dialog_item_cancel');
     showDialog(
         context: context,
         builder: (BuildContext context) {

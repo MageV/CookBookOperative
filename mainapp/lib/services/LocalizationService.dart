@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:mainapp/services/dbService.dart';
+import 'package:mainapp/main.dart';
 
 class LocalizationService {
   LocalizationService._privateConstructor();
   static late var defaultLanguage;
   static const allowedLang = ['en_US', 'ru_RU'];
-  late Map<String,String> _appStrings;
+  Map<String,String> _appStrings=Map();
 
  /* static Map<String, Map<String, String>> langValues = {
     'en_US': {
@@ -78,15 +81,17 @@ class LocalizationService {
   factory LocalizationService() {
     return _instance;
   }
-  void init(String locale) async{
+
+  Future<void> init(String locale) async {
     if (allowedLang.contains(locale)) {
       defaultLanguage = locale;
     } else
       defaultLanguage = allowedLang[0];
-    _appStrings=await dbService.parseAppXml(true);
+    _appStrings=await IOService.parseAppXml(true);
   }
 
   String? of(String name) {
+    print("AppStrings:"+_appStrings[name]!);
     return _appStrings[name];
   }
 
