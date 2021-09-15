@@ -28,7 +28,8 @@
     <item name="recipe_cam_step1_title">Сканирование ингредиентов</item>
     <item name="recipe_cam_step2_title">Сканирование процесса приготовления</item>
     <item name="recipe_cam_step3_title">Сканирование изображения блюда</item>
-    <item name="recipe_cam_step1_subtitle">Наведите объектив на перечень ингредиентов \n и нажмите красную кнопку</item>
-    <item name="recipe_cam_step2_subtitle">Наведите объектив на процесс приготовления \n и нажмите красную кнопку</item>
-    <item name="recipe_cam_step3_subtitle">Наведите объектив на изображение блюда \n и нажмите красную кнопку</item>
+    <item name="recipe_cam_step1_subtitle">Наведите объектив на перечень ингредиентов  и нажмите Continue</item>
+    <item name="recipe_cam_step2_subtitle">Наведите объектив на процесс приготовления и нажмите красную Continue</item>
+    <item name="recipe_cam_step3_subtitle">Наведите объектив на изображение блюда и нажмите красную Continue</item>
+    <item name="recipe_finished">Сканирование завершено</item>
 </root>

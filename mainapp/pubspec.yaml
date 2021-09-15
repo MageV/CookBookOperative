@@ -40,8 +40,9 @@ dependencies:
   xml: ^5.3.0
   floor_annotation: ^1.0.1
   alphabet_list_scroll_view: ^2.0.0
-  cool_stepper: ^1.2.1
+  flutter_camera_ml_vision: ^3.0.1
   uuid: ^3.0.4
+  image:  ^3.0.4
   #intl: ^0.17.0
  # flutter_localizations: # Add this line
  #   sdk: flutter

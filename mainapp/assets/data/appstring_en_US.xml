@@ -31,4 +31,5 @@
     <item name="recipe_cam_step1_subtitle">Put ingredients section in camera box \n below and press red button</item>
     <item name="recipe_cam_step2_subtitle">Put process description in camera box \n below and press red button</item>
     <item name="recipe_cam_step3_subtitle">Put result picture in camera box \n belo and press red button</item>
+    <item name="recipe_finished">Сканирование завершено</item>
 </root>

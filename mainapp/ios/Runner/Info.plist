@@ -3,6 +3,10 @@
 <plist version="1.0">
 <dict>
     <key>NSCameraUsageDescription</key>
+    <string>Can I use the camera please?</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Can I use the mic please?</string>
+    <key>NSCameraUsageDescription</key>
     <string>Access to Camera</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Access to Microphone</string>
