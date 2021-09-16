@@ -6,6 +6,7 @@ part of 'model.dart';
 // FloorGenerator
 // **************************************************************************
 
+// ignore: avoid_classes_with_only_static_members
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
@@ -83,11 +84,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `category` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `header` TEXT NOT NULL, `image_path` TEXT NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ingredient` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `header` TEXT NOT NULL)');
-        await database.execute(
-            'CREATE TABLE IF NOT EXISTS `recipe` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `header` TEXT NOT NULL, `description` TEXT NOT NULL, `image_path` TEXT NOT NULL, `fk_category` INTEGER NOT NULL, FOREIGN KEY (`fk_category`) REFERENCES `category` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
-        await database.execute(
-            'CREATE TABLE IF NOT EXISTS `contents` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `volume` REAL NOT NULL, `measure` TEXT NOT NULL, `fk_recipe` INTEGER NOT NULL, `fk_ingrs` INTEGER NOT NULL, FOREIGN KEY (`fk_recipe`) REFERENCES `recipe` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, FOREIGN KEY (`fk_ingrs`) REFERENCES `ingredient` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+            'CREATE TABLE IF NOT EXISTS `recipe` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `header` TEXT NOT NULL, `ingredients` TEXT NOT NULL, `description` TEXT NOT NULL, `image_path` TEXT NOT NULL, `energy` INTEGER NOT NULL, `fk_category` INTEGER NOT NULL, FOREIGN KEY (`fk_category`) REFERENCES `category` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -112,30 +109,17 @@ class _$DbDao extends DbDao {
                   'header': item.header,
                   'image_path': item.image_path
                 }),
-        _ingredientInsertionAdapter = InsertionAdapter(
-            database,
-            'ingredient',
-            (Ingredient item) =>
-                <String, Object?>{'id': item.id, 'header': item.header}),
         _recipeInsertionAdapter = InsertionAdapter(
             database,
             'recipe',
             (Recipe item) => <String, Object?>{
                   'id': item.id,
                   'header': item.header,
+                  'ingredients': item.ingredients,
                   'description': item.description,
                   'image_path': item.image_path,
+                  'energy': item.energy,
                   'fk_category': item.fk_category
-                }),
-        _contentsInsertionAdapter = InsertionAdapter(
-            database,
-            'contents',
-            (Contents item) => <String, Object?>{
-                  'id': item.id,
-                  'volume': item.volume,
-                  'measure': item.measure,
-                  'fk_recipe': item.fk_recipe,
-                  'fk_ingrs': item.fk_ingrs
                 }),
         _categoryUpdateAdapter = UpdateAdapter(
             database,
@@ -146,12 +130,6 @@ class _$DbDao extends DbDao {
                   'header': item.header,
                   'image_path': item.image_path
                 }),
-        _ingredientUpdateAdapter = UpdateAdapter(
-            database,
-            'ingredient',
-            ['id'],
-            (Ingredient item) =>
-                <String, Object?>{'id': item.id, 'header': item.header}),
         _recipeUpdateAdapter = UpdateAdapter(
             database,
             'recipe',
@@ -159,20 +137,11 @@ class _$DbDao extends DbDao {
             (Recipe item) => <String, Object?>{
                   'id': item.id,
                   'header': item.header,
+                  'ingredients': item.ingredients,
                   'description': item.description,
                   'image_path': item.image_path,
+                  'energy': item.energy,
                   'fk_category': item.fk_category
-                }),
-        _contentsUpdateAdapter = UpdateAdapter(
-            database,
-            'contents',
-            ['id'],
-            (Contents item) => <String, Object?>{
-                  'id': item.id,
-                  'volume': item.volume,
-                  'measure': item.measure,
-                  'fk_recipe': item.fk_recipe,
-                  'fk_ingrs': item.fk_ingrs
                 }),
         _categoryDeletionAdapter = DeletionAdapter(
             database,
@@ -183,12 +152,6 @@ class _$DbDao extends DbDao {
                   'header': item.header,
                   'image_path': item.image_path
                 }),
-        _ingredientDeletionAdapter = DeletionAdapter(
-            database,
-            'ingredient',
-            ['id'],
-            (Ingredient item) =>
-                <String, Object?>{'id': item.id, 'header': item.header}),
         _recipeDeletionAdapter = DeletionAdapter(
             database,
             'recipe',
@@ -196,20 +159,11 @@ class _$DbDao extends DbDao {
             (Recipe item) => <String, Object?>{
                   'id': item.id,
                   'header': item.header,
+                  'ingredients': item.ingredients,
                   'description': item.description,
                   'image_path': item.image_path,
+                  'energy': item.energy,
                   'fk_category': item.fk_category
-                }),
-        _contentsDeletionAdapter = DeletionAdapter(
-            database,
-            'contents',
-            ['id'],
-            (Contents item) => <String, Object?>{
-                  'id': item.id,
-                  'volume': item.volume,
-                  'measure': item.measure,
-                  'fk_recipe': item.fk_recipe,
-                  'fk_ingrs': item.fk_ingrs
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -220,27 +174,15 @@ class _$DbDao extends DbDao {
 
   final InsertionAdapter<Category> _categoryInsertionAdapter;
 
-  final InsertionAdapter<Ingredient> _ingredientInsertionAdapter;
-
   final InsertionAdapter<Recipe> _recipeInsertionAdapter;
-
-  final InsertionAdapter<Contents> _contentsInsertionAdapter;
 
   final UpdateAdapter<Category> _categoryUpdateAdapter;
 
-  final UpdateAdapter<Ingredient> _ingredientUpdateAdapter;
-
   final UpdateAdapter<Recipe> _recipeUpdateAdapter;
-
-  final UpdateAdapter<Contents> _contentsUpdateAdapter;
 
   final DeletionAdapter<Category> _categoryDeletionAdapter;
 
-  final DeletionAdapter<Ingredient> _ingredientDeletionAdapter;
-
   final DeletionAdapter<Recipe> _recipeDeletionAdapter;
-
-  final DeletionAdapter<Contents> _contentsDeletionAdapter;
 
   @override
   Future<Int16?> getCategoryCount() async {
@@ -255,69 +197,37 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<List<Ingredient?>> getAllIngredients() async {
-    return _queryAdapter.queryList('SELECT * from ingredient order by header',
-        mapper: (Map<String, Object?> row) =>
-            Ingredient(row['id'] as int, row['header'] as String));
-  }
-
-  @override
-  Future<List<Ingredient?>> getIngredientOf(String startwith) async {
-    return _queryAdapter.queryList(
-        'SELECT * from ingredient where header like ?1',
-        mapper: (Map<String, Object?> row) =>
-            Ingredient(row['id'] as int, row['header'] as String),
-        arguments: [startwith]);
-  }
-
-  @override
   Future<List<Recipe>?> getRecipeOfCategory(int id) async {
     return _queryAdapter.queryList(
         'Select id,header,image_path from Recipe where fk_category=?1 order by header',
-        mapper: (Map<String, Object?> row) => Recipe(row['id'] as int, row['header'] as String, row['description'] as String, row['image_path'] as String, row['fk_category'] as int),
+        mapper: (Map<String, Object?> row) => Recipe(row['id'] as int, row['header'] as String, row['ingredients'] as String, row['description'] as String, row['image_path'] as String, row['energy'] as int, row['fk_category'] as int),
         arguments: [id]);
   }
 
   @override
   Future<List<Recipe>?> getRecipeById(int id) async {
-    return _queryAdapter.queryList(
-        'select id,header,description,image_path from Recipe where id=?1',
+    return _queryAdapter.queryList('select * from Recipe where id=?1',
         mapper: (Map<String, Object?> row) => Recipe(
             row['id'] as int,
             row['header'] as String,
+            row['ingredients'] as String,
             row['description'] as String,
             row['image_path'] as String,
+            row['energy'] as int,
             row['fk_category'] as int),
         arguments: [id]);
   }
 
   @override
-  Future<List<dynamic>?> selectDetailedRecipe(int recid) async {
+  Future<Map<int, String>?> getRecipeByIngredients(String p1) async {
     await _queryAdapter.queryNoReturn(
-        'select I.id,I.header,c.measure,C.volumefrom Ingredient I,Contents c inner join on I.id=c.fk_ingrs where C.fk_recipe=?1',
-        arguments: [recid]);
-  }
-
-  @override
-  Future<List<dynamic>?> selectDescRecipe(int recid) async {
-    await _queryAdapter.queryNoReturn(
-        'select description from recipe where id=?1',
-        arguments: [recid]);
-  }
-
-  @override
-  Future<int?> getIngredientsCount() async {
-    await _queryAdapter.queryNoReturn('select count(*) from ingredient');
+        'select id,header from Recipe where ingredients like \'%?1\'',
+        arguments: [p1]);
   }
 
   @override
   Future<int?> getLastIDCategory() async {
     await _queryAdapter.queryNoReturn('select max(id) from category');
-  }
-
-  @override
-  Future<int?> getLastIDIngredient() async {
-    await _queryAdapter.queryNoReturn('select max(id) from ingredient');
   }
 
   @override
@@ -327,26 +237,8 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<List<int>> insertIngredients(List<Ingredient> items) {
-    return _ingredientInsertionAdapter.insertListAndReturnIds(
-        items, OnConflictStrategy.abort);
-  }
-
-  @override
-  Future<int> insertIngredient(Ingredient item) {
-    return _ingredientInsertionAdapter.insertAndReturnId(
-        item, OnConflictStrategy.abort);
-  }
-
-  @override
   Future<List<int>> insertRecipes(List<Recipe> items) {
     return _recipeInsertionAdapter.insertListAndReturnIds(
-        items, OnConflictStrategy.abort);
-  }
-
-  @override
-  Future<List<int>> insertContents(List<Contents> items) {
-    return _contentsInsertionAdapter.insertListAndReturnIds(
         items, OnConflictStrategy.abort);
   }
 
@@ -357,20 +249,8 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<int> UpdateIngredients(List<Ingredient> items) {
-    return _ingredientUpdateAdapter.updateListAndReturnChangedRows(
-        items, OnConflictStrategy.abort);
-  }
-
-  @override
   Future<int> UpdateRecipes(List<Recipe> items) {
     return _recipeUpdateAdapter.updateListAndReturnChangedRows(
-        items, OnConflictStrategy.abort);
-  }
-
-  @override
-  Future<int> UpdateContents(List<Contents> items) {
-    return _contentsUpdateAdapter.updateListAndReturnChangedRows(
         items, OnConflictStrategy.abort);
   }
 
@@ -380,17 +260,7 @@ class _$DbDao extends DbDao {
   }
 
   @override
-  Future<int> deleteIngredients(List<Ingredient> items) {
-    return _ingredientDeletionAdapter.deleteListAndReturnChangedRows(items);
-  }
-
-  @override
   Future<int> deleteRecipes(List<Recipe> items) {
     return _recipeDeletionAdapter.deleteListAndReturnChangedRows(items);
-  }
-
-  @override
-  Future<int> deleteContents(List<Contents> items) {
-    return _contentsDeletionAdapter.deleteListAndReturnChangedRows(items);
   }
 }

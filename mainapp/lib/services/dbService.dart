@@ -8,7 +8,6 @@ import 'package:xml/xml.dart';
 
 import 'ioService.dart';
 
-
 class dbService {
   dbService._privateConstructor();
   late var Preferences;
@@ -30,22 +29,10 @@ class dbService {
         String path = "assets/graphics/category/" + name + ".png";
 
         String? cat = LocalizationService().of(name);
-        print(name);
-        print(cat);
         items.add(new Category(i, cat!, path));
       }
       await dao.insertCategories(items);
       await ApplicationParameters.setBool("INIT", true);
-      List<String> _raw = await ioService().parseXml(true);
-      List<Ingredient> _ingredients = [];
-      int id = 1;
-      for (int i = 0; i < _raw.length; i++) {
-        Ingredient ingredient = new Ingredient(i, _raw[i]);
-        int ids = await dao.insertIngredient(ingredient);
-        print("ids:" + ids.toString());
-      }
     }
   }
-
-
 }

@@ -26,8 +26,8 @@
                  Flutter's first frame. -->
 
             <meta-data
-                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-                android:value="ocr,label,barcode" />
+                android:name="com.google.mlkit.vision.DEPENDENCIES"
+                android:value="ica" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

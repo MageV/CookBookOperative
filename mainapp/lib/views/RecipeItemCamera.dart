@@ -2,8 +2,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:simple_ocr_plugin/simple_ocr_plugin.dart';
 import 'dart:io' as io;
 
 
@@ -19,17 +19,27 @@ class RecipeItemCamera extends StatefulWidget {
   RecipeItemCamera({Key? key}) : super(key: key);
   static const routeName = '/RecipeItemCamera';
 
+
+
+
   @override
   _RecipeItemCameraState createState() => _RecipeItemCameraState();
 }
 
 class _RecipeItemCameraState extends State<RecipeItemCamera> {
   final _formKey = GlobalKey<_RecipeItemCameraState>();
-  Map<stepID, Image> images = new Map();
-  Map<stepID, Size> imagesizes=new Map();
+  Map<stepID, String> images = new Map();
   late bool _complete=false;
   int _currentStep = 0;
-  //late io.File _file;
+  late TextDetector textDetector;
+
+  @override
+  void dispose() {
+    textDetector.close();
+  } //late io.File _file;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,37 +125,31 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
 
   _getFileFromCamera(BuildContext context, stepID step) async {
     try {
-      final Completer<Size> completer = Completer<Size>();
       final XFile? file =
           await ImagePicker().pickImage(source: ImageSource.camera);
-      Image image=decodeXFile(file!);
-      image.image.resolve(const ImageConfiguration()).addListener(
-        ImageStreamListener((ImageInfo info, bool _) {
-          completer.complete(Size(
-            info.image.width.toDouble(),
-            info.image.height.toDouble(),
-          ));
-        }),
-      );
-      final Size imageSize = await completer.future;
-      imagesizes.putIfAbsent(step, () => imageSize);
-      images.putIfAbsent(step,()=> image);
+      String recognized=await decodeXFile(file!);
+      images.putIfAbsent(step,()=> recognized);
     } catch (e) {
       print(e);
       return null;
     }
   }
 
-  Image decodeXFile(XFile infile)
-   {
-    final path=io.File(infile.path);
-    return Image.file(path);
+  Future<String> decodeXFile(XFile infile)
+   async {
+    final path=infile.path;
+    final inputImage=InputImage.fromFilePath(path);
+    Vision vision=GoogleMlKit.vision;
+    vision.languageModelManager().downloadModel(modelTag);
+    textDetector = vision.textDetector();
+    final RecognisedText recognisedText = await textDetector.processImage(inputImage);
+    String text = recognisedText.text;
+    print(text);
+    return text;
   }
 
   _finishRecipe()
-  async{
-    Image ingredients=images[stepID.stepID_One]!;
-    Image process=images[stepID.stepID_Two]!;
-    //String ingrs_string=await SimpleOcrPlugin.performOCR()
+  {
+
   }
 }

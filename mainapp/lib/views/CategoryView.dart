@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mainapp/models/WidgetParams.dart';
 import 'package:mainapp/models/model.dart';
-import 'package:mainapp/views/IngredientsView.dart';
 import 'package:mainapp/views/RecipeItemCamera.dart';
 import '../main.dart';
 import 'RecipeItemManual.dart';
@@ -131,7 +130,6 @@ class _CategoryViewState extends State<CategoryView> {
                         children: <Widget>[
                           IconButton(
                             icon: Icon(Icons.description), onPressed: () {
-                            _iconPressedIngredients(context);
                           },
 
                           )
@@ -142,7 +140,6 @@ class _CategoryViewState extends State<CategoryView> {
               ])),
       routes: {
         RecipesView.routeName: (context) => RecipesView(),
-        IngredientsView.routeName: (context) => IngredientsView(),
         SettingsView.routeName: (context) => SettingsView(),
         RecipeItemManual.routeName:(context)=>RecipeItemManual(),
         RecipeItemCamera.routeName:(context)=>RecipeItemCamera()
@@ -161,9 +158,4 @@ class _CategoryViewState extends State<CategoryView> {
 
   _fabPressed() {}
 
-  _iconPressedIngredients(BuildContext context) {
-    Future.delayed(Duration.zero, () {
-      Navigator.pushNamed(context, IngredientsView.routeName, arguments: null);
-    });
-  }
 }

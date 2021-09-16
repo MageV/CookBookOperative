@@ -13,6 +13,7 @@ late var IOService;
 late var LocaleService;
 late var DBService;
 final String defaultLocale=Platform.localeName;
+late String modelTag;
 
 
 
@@ -22,6 +23,7 @@ void main() {
 
   startMeUp() async
   {
+    modelTag=(defaultLocale.split('_'))[0];
     IOService=ioService();
     LocaleService=LocalizationService();
     DBService=dbService();

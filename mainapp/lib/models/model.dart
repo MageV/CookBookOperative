@@ -14,14 +14,7 @@ class Category
   final String image_path;
   Category(this.id, this.header,this.image_path);
 }
-@Entity(tableName: 'ingredient')
-class Ingredient
-{
-  @PrimaryKey(autoGenerate: true)
-  final int id;
-  final String header;
-  Ingredient(this.id, this.header);
-}
+
 @Entity(tableName: 'recipe',
 foreignKeys: [
   ForeignKey(
@@ -34,33 +27,13 @@ class Recipe
   @PrimaryKey(autoGenerate: true)
   final int id;
   final String header;
+  final String ingredients;
   final String description;
   final String image_path;
+  final int energy;
   final int fk_category;
 
-  Recipe(this.id, this.header, this.description,this.image_path, this.fk_category);
-}
-@Entity(tableName: 'contents',
-foreignKeys: [
-  ForeignKey(
-    childColumns:['fk_recipe'],
-    parentColumns:['id'],
-    entity:Recipe
-  ),
-  ForeignKey(
-    childColumns:['fk_ingrs'],
-    parentColumns:['id'],
-    entity:Ingredient
-  )
-])
-class Contents {
-  @PrimaryKey(autoGenerate: true)
-  final int id;
-  final double volume;
-  final String measure;
-  final int fk_recipe;
-  final int fk_ingrs;
-  Contents(this.id, this.volume,this.measure, this.fk_recipe, this.fk_ingrs);
+  Recipe(this.id, this.header,this.ingredients,this.description,this.image_path,this.energy, this.fk_category);
 }
 
 
@@ -74,32 +47,18 @@ abstract class DbDao
   @Query('SELECT * from category order by header')
   Future<List<Category?>> getAllCategories();
 
-  @Query('SELECT * from ingredient order by header')
-  Future<List<Ingredient?>> getAllIngredients();
-
-  @Query('SELECT * from ingredient where header like :startwith')
-  Future<List<Ingredient?>> getIngredientOf(String startwith);
-
   @Query('Select id,header,image_path from Recipe where fk_category=:id order by header')
   Future<List<Recipe>?> getRecipeOfCategory(int id);
 
-  @Query('select id,header,description,image_path from Recipe where id=:id')
+  @Query('select * from Recipe where id=:id')
   Future<List<Recipe>?> getRecipeById(int id);
 
-  @Query('select I.id,I.header,c.measure,C.volume'
-      'from Ingredient I,Contents c inner join on I.id=c.fk_ingrs where C.fk_recipe=:recid')
-  Future<List<dynamic>?> selectDetailedRecipe(int recid);
+  @Query("select id,header from Recipe where ingredients like '%:p1'")
+  Future<Map<int,String>?> getRecipeByIngredients(String p1);
 
-  @Query('select description from recipe where id=:recid')
-  Future<List<dynamic>?> selectDescRecipe(int recid);
-
-  @Query('select count(*) from ingredient')
-  Future<int?> getIngredientsCount();
 
   @Query ('select max(id) from category')
   Future<int?> getLastIDCategory();
-  @Query ('select max(id) from ingredient')
-  Future<int?> getLastIDIngredient();
 
   @insert
   @OnConflictStrategy.replace
@@ -107,32 +66,16 @@ abstract class DbDao
   @update
   Future<int?> UpdateCategories(List<Category> items);
   @insert
-  @OnConflictStrategy.replace
-  Future<List<int>?> insertIngredients(List<Ingredient> items);
-  @insert
-  @OnConflictStrategy.replace
-  Future<int> insertIngredient(Ingredient item);
-  @update
-  Future<int?> UpdateIngredients(List<Ingredient> items);
-  @insert
   Future<List<int>?> insertRecipes(List<Recipe> items);
   @update
   Future<int?> UpdateRecipes(List<Recipe> items);
-  @insert
-  Future<List<int>?> insertContents(List<Contents> items);
-  @update
-  Future<int?> UpdateContents(List<Contents> items);
   @delete
   Future<int?> deleteCategories(List<Category> items);
   @delete
-  Future<int?> deleteIngredients(List<Ingredient> items);
-  @delete
   Future<int?> deleteRecipes(List<Recipe> items);
-  @delete
-  Future<int?> deleteContents(List<Contents> items);
 }
 
-@Database(version:1,entities:[Category,Ingredient,Recipe,Contents])
+@Database(version:1,entities:[Category,Recipe])
 abstract class AppDatabase extends FloorDatabase
 {
   DbDao get dbDao;
