@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io' as io;
+
 
 
 
@@ -29,7 +29,7 @@ class RecipeItemCamera extends StatefulWidget {
 class _RecipeItemCameraState extends State<RecipeItemCamera> {
   final _formKey = GlobalKey<_RecipeItemCameraState>();
   Map<stepID, String> images = new Map();
-  late bool _complete=false;
+  //late bool _complete=false;
   int _currentStep = 0;
   late TextDetector textDetector;
 
@@ -139,9 +139,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
    async {
     final path=infile.path;
     final inputImage=InputImage.fromFilePath(path);
-    Vision vision=GoogleMlKit.vision;
-    vision.languageModelManager().downloadModel(modelTag);
-    textDetector = vision.textDetector();
+    textDetector = IOService.getVisionAPI().textDetector();
     final RecognisedText recognisedText = await textDetector.processImage(inputImage);
     String text = recognisedText.text;
     print(text);
