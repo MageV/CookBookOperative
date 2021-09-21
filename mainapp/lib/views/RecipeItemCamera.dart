@@ -130,7 +130,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
       String recognized=await decodeXFile(file!);
       images.putIfAbsent(step,()=> recognized);
     } catch (e) {
-      print("Error:"+e);
+      print("Error:"+e.toString());
       return null;
     }
   }
