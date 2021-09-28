@@ -75,26 +75,26 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
                 onStepCancel: cancel,
                 steps: <Step>[
               Step(
-                  title: Text(LocaleService.of("recipe_cam_step1_title")),
+                  title: Text(LocaleService.of("recipe_cam_step1_title")!),
                   content: Column(
                     children: [
-                      Text(LocaleService.of("recipe_cam_step1_subtitle")),
+                      Text(LocaleService.of("recipe_cam_step1_subtitle")!),
 
                     ],
                   )),
               Step(
-                  title: Text(LocaleService.of("recipe_cam_step2_title")),
+                  title: Text(LocaleService.of("recipe_cam_step2_title")!),
                   content: Column(
                     children: [
-                      Text(LocaleService.of("recipe_cam_step2_subtitle")),
+                      Text(LocaleService.of("recipe_cam_step2_subtitle")!),
 
                     ],
                   )),
               Step(
-                  title:Text( LocaleService.of("recipe_cam_step3_title")),
+                  title:Text( LocaleService.of("recipe_cam_step3_title")!),
                   content: Column(
                     children: [
-                      Text(LocaleService.of("recipe_cam_step3_subtitle")),
+                      Text(LocaleService.of("recipe_cam_step3_subtitle")!),
 
                     ],
                   ))

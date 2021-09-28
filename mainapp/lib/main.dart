@@ -33,7 +33,7 @@ void main() {
     databaseBuilder("com.magev.cookbook.sqlite").build();
     await LocaleService.init(defaultLocale);
     await DBService.Init(databaseApplication.dbDao);
-    OCRApi=await IOService.getApi();
+    OCRApi=(await IOService.getApi())!;
     runApp(CategoryView());
   }
    startMeUp();
