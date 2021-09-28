@@ -1,6 +1,5 @@
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,11 +30,10 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
   Map<stepID, String> images = new Map();
   //late bool _complete=false;
   int _currentStep = 0;
-  late TextDetector textDetector;
+
 
   @override
   void dispose() {
-    textDetector.close();
   } //late io.File _file;
 
 
@@ -128,6 +126,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
       final XFile? file =
           await ImagePicker().pickImage(source: ImageSource.camera);
       String recognized=await decodeXFile(file!);
+      print(recognized);
       images.putIfAbsent(step,()=> recognized);
     } catch (e) {
       print("Error:"+e.toString());
@@ -136,16 +135,25 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
   }
 
   Future<String> decodeXFile(XFile infile)
-   async {
-    final path=infile.path;
-    final inputImage=InputImage.fromFilePath(path);
-    textDetector = IOService.getVisionAPI().textDetector();
-    final RecognisedText recognisedText = await textDetector.processImage(inputImage);
-    String text = recognisedText.text;
-    print(text);
-    return text;
+  async {
+    String retval="";
+    final inputImage=InputImage.fromFilePath(infile.path);
+    TextDetector textDetector=OCRApi.textDetector();
+    RecognisedText text=await textDetector.processImage(inputImage);
+    for (TextBlock block in text.blocks) {
+      final Rect rect = block.rect;
+      final List<Offset> cornerPoints = block.cornerPoints;
+      final String text = block.text;
+      final List<String> languages = block.recognizedLanguages;
+      for (TextLine line in block.lines) {
+        for (TextElement element in line.elements) {
+          retval+=element.text;
+        }
+      }
+    }
+    textDetector.close();
+    return retval;
   }
-
   _finishRecipe()
   {
 

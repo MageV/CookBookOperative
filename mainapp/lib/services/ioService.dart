@@ -1,34 +1,37 @@
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:mainapp/main.dart';
 import 'package:xml/xml.dart';
 
-class ioService
-{
+class ioService {
   ioService._privateConstructor();
 
-  late Vision? _vision;
+  Vision? vision = null;
 
 
-  static final ioService _instance=ioService._privateConstructor();
+  static final ioService _instance = ioService._privateConstructor();
+
 
   factory ioService()
   {
-
     return _instance;
   }
 
-  Vision? getVisionAPI()
-  {
-    if(_vision==null)
-    {
-      _vision=GoogleMlKit.vision;
-      _vision!.languageModelManager().downloadModel(modelTag);
+  Future<Vision?> getApi()
+  async {
+    if(vision==null) {
+      vision = GoogleMlKit.vision;
+      print("LOCALE "+defaultLocale);
+      print("MODEL "+defaultLocale.split("_")[1]);
+      await vision!.languageModelManager().downloadModel(
+          defaultLocale.split("_")[1]);
     }
-    return _vision;
+    return vision;
   }
 
-   Future<List<String>> parseXml(bool fromFile) async {
+
+  Future<List<String>> parseXml(bool fromFile) async {
     final List<String> output = [];
     Iterable<XmlElement> elements = [];
     if (fromFile) {
@@ -44,23 +47,23 @@ class ioService
     return output;
   }
 
-   Future<Map<String, String>> parseAppXml(bool fromFile)  async {
+  Future<Map<String, String>> parseAppXml(bool fromFile) async {
     Iterable<XmlElement> elements = [];
     XmlDocument document;
     final Map<String, String> output = new Map<String, String>();
     if (fromFile) {
       String filename = 'assets/data/appstring_' + defaultLocale + '.xml';
-      String xmlString=await rootBundle.loadString(filename);
-      document=XmlDocument.parse(xmlString);
-      elements=document.findAllElements("item");
+      String xmlString = await rootBundle.loadString(filename);
+      document = XmlDocument.parse(xmlString);
+      elements = document.findAllElements("item");
       elements.forEach((element) {
-        if(element.hasParent)
-          {
-           // print(element.getAttribute("name"));
-            output.putIfAbsent(element.getAttribute("name")!, () =>element.text);
-          }
+        if (element.hasParent) {
+          // print(element.getAttribute("name"));
+          output.putIfAbsent(element.getAttribute("name")!, () => element.text);
+        }
       });
     }
     return output;
   }
+
 }

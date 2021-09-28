@@ -91,7 +91,7 @@ class LocalizationService {
   }
 
   String? of(String name) {
-    print("AppStrings:"+_appStrings[name]!);
+    //print("AppStrings:"+_appStrings[name]!);
     return _appStrings[name];
   }
 
