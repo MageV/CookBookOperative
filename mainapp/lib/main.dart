@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:mainapp/services/dbService.dart';
@@ -13,7 +14,6 @@ const int Categories=7;
 late ioService IOService;
 late LocalizationService LocaleService;
 late dbService DBService;
-late  Vision OCRApi;
 final String defaultLocale=Platform.localeName;
 late String modelTag;
 
@@ -33,7 +33,6 @@ void main() {
     databaseBuilder("com.magev.cookbook.sqlite").build();
     await LocaleService.init(defaultLocale);
     await DBService.Init(databaseApplication.dbDao);
-    OCRApi=(await IOService.getApi())!;
     runApp(CategoryView());
   }
    startMeUp();

@@ -125,7 +125,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
     try {
       final XFile? file =
           await ImagePicker().pickImage(source: ImageSource.camera);
-      String recognized=await decodeXFile(file!);
+      String recognized=await IOService.parseImageFree(file!);
       print(recognized);
       images.putIfAbsent(step,()=> recognized);
     } catch (e) {
@@ -134,7 +134,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
     }
   }
 
-  Future<String> decodeXFile(XFile infile)
+ /* Future<String> decodeXFile(XFile infile)
   async {
     String retval="";
     final inputImage=InputImage.fromFilePath(infile.path);
@@ -151,9 +151,9 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
         }
       }
     }
-    textDetector.close();
+    await textDetector.close();
     return retval;
-  }
+  }*/
   _finishRecipe()
   {
 
