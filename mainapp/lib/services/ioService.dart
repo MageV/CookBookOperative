@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +9,8 @@ import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 import 'package:mainapp/main.dart';
 import 'package:xml/xml.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'dart:typed_data';
 
 
 
@@ -89,6 +91,24 @@ class ioService {
     return value;
   }
 
+ Future<String> Image2Pdf(XFile file)
+ async {
+   final ByteData data=(await file.readAsBytes()) as ByteData ;
+   PdfDocument document=PdfDocument();
+   PdfPage page=document.pages.add();
+   final PdfImage image=PdfBitmap(
+       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes)
+   );
+   page.graphics.drawImage(
+       image, Rect.fromLTWH(0, 0, page.size.width, page.size.height));
+   List<int> retList=document.save();
+   String b64e=base64Encode(retList);
+   String header="data:application/pdf;base64,";
+   b64e+=header;
+   return b64e;
+ }
+
+
 
   Future<String> parseImageFree(XFile image)
   async{
@@ -96,7 +116,8 @@ class ioService {
     String key="44cb80079a88957";
     String locale=defaultLocale.split('_')[1];
     String _url = "https://api.ocr.space/parse/image";
-    Map<String,String> httpParams=new Map();
+    Map<String,dynamic> httpParams=new Map();
+    Map<String,String> httpHeaders=new Map();
     String langkey="";
     switch(locale)
     {
@@ -116,14 +137,14 @@ class ioService {
           break;
         }
     }
-
-    String ImgBase64=base64Encode(io.File(image.path).readAsBytesSync());
     httpParams.putIfAbsent("apiKey", () => key);
-    print(key);
-    httpParams.putIfAbsent("language", () => langkey);
-    httpParams.putIfAbsent("base64Image", () => ImgBase64);
+    String base64String=await Image2Pdf(image);
+    httpParams.putIfAbsent("base64Image", () =>base64String);
+    httpHeaders.putIfAbsent("User-Agent",()=> "Mozilla/5.0");
+    httpHeaders.putIfAbsent("Accept-Language",()=> "$defaultLocale,$langkey");
     Uri uri=Uri.parse(_url);
-    http.Response response=await http.post(uri,body:httpParams);
+    http.Response response=await http.post(uri,headers:httpHeaders,body:httpParams);
+    print(response.body);
     return (response.body);
   }
 

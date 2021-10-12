@@ -1,8 +1,9 @@
 
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+
+
+
 
 
 
@@ -34,6 +35,7 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
 
   @override
   void dispose() {
+    super.dispose();
   } //late io.File _file;
 
 
@@ -133,7 +135,6 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
       return null;
     }
   }
-
  /* Future<String> decodeXFile(XFile infile)
   async {
     String retval="";
