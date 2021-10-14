@@ -126,8 +126,8 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
   _getFileFromCamera(BuildContext context, stepID step) async {
     try {
       final XFile? file =
-          await ImagePicker().pickImage(source: ImageSource.camera);
-      String recognized=await IOService.parseImageFree(file!);
+          await ImagePicker().pickImage(source: ImageSource.camera,imageQuality: 35);
+      String recognized=await IOService.parse(fromFile:true,file: file,free: true);
       print(recognized);
       images.putIfAbsent(step,()=> recognized);
     } catch (e) {
@@ -135,26 +135,6 @@ class _RecipeItemCameraState extends State<RecipeItemCamera> {
       return null;
     }
   }
- /* Future<String> decodeXFile(XFile infile)
-  async {
-    String retval="";
-    final inputImage=InputImage.fromFilePath(infile.path);
-    TextDetector textDetector=OCRApi.textDetector();
-    RecognisedText text=await textDetector.processImage(inputImage);
-    for (TextBlock block in text.blocks) {
-      final Rect rect = block.rect;
-      final List<Offset> cornerPoints = block.cornerPoints;
-      final String text = block.text;
-      final List<String> languages = block.recognizedLanguages;
-      for (TextLine line in block.lines) {
-        for (TextElement element in line.elements) {
-          retval+=element.text;
-        }
-      }
-    }
-    await textDetector.close();
-    return retval;
-  }*/
   _finishRecipe()
   {
 

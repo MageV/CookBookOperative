@@ -16,6 +16,7 @@
     <item name="header_4">Search</item>
     <item name="dialog_item_new_manual">Manual</item>
     <item name="dialog_item_new_camera">Camera</item>
+    <item name="dialog_item_new_web">Web Link</item>
     <item name="dialog_item_new_header">Enter recipe</item>
     <item name="dialog_item_ok">OK</item>
     <item name="dialog_item_cancel">Cancel</item>

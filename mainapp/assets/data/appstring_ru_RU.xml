@@ -16,6 +16,7 @@
     <item name="header_4">Поиск</item>
     <item name="dialog_item_new_manual">Вручную</item>
     <item name="dialog_item_new_camera">Камера</item>
+    <item name="dialog_item_new_web">Ссылка</item>
     <item name="dialog_item_new_header">Ввод рецепта</item>
     <item name="dialog_item_ok">OK</item>
     <item name="dialog_item_cancel">Отмена</item>

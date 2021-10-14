@@ -92,11 +92,16 @@ class _RecipesViewState extends State<RecipesView> {
       Navigator.pushNamed(context, RecipeItemCamera.routeName, arguments: null);
     });
   }
+  _runWeb(BuildContext context)
+  {
+
+  }
 
   _fabPressed(BuildContext context) {
     String? dialogHeader = LocaleService.of('dialog_item_new_header');
     String? optionsMan = LocaleService.of('dialog_item_new_manual');
     String? optionsCam = LocaleService.of('dialog_item_new_camera');
+    String? optionsWeb=LocaleService.of('dialog_item_new_web');
     String? dialogCancel = LocaleService.of('dialog_item_cancel');
     showDialog(
         context: context,
@@ -116,7 +121,7 @@ class _RecipesViewState extends State<RecipesView> {
                         title: Text(optionsMan!),
                         leading: CircleAvatar(child: Icon(Icons.waves)),
                       ))),
-              SimpleDialogOption(
+/*              SimpleDialogOption(
                   onPressed: () => _runCamera(context),
                   child: Card(
                       elevation: 2,
@@ -127,6 +132,17 @@ class _RecipesViewState extends State<RecipesView> {
                         title: Text(optionsCam!),
                         leading: CircleAvatar(
                             child: Icon(Icons.add_a_photo_rounded)),
+                      ))),*/
+              SimpleDialogOption(
+                  onPressed: () => _runWeb(context),
+                  child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.white70, width: 1),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: ListTile(
+                        title: Text(optionsWeb!),
+                        leading: CircleAvatar(child: Icon(Icons.clear)),
                       ))),
               SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
