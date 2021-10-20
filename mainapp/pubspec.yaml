@@ -51,6 +51,7 @@ dependencies:
   syncfusion_flutter_pdf: ^19.3.44-beta
   html: ^0.15.0
   flutter_widget_from_html: ^0.7.0
+  receive_sharing_intent: ^1.4.5
   #intl: ^0.17.0
  # flutter_localizations: # Add this line
  #   sdk: flutter
